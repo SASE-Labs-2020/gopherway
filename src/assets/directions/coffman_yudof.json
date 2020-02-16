@@ -1,0 +1,23 @@
+{
+	"origin": "Coffman Memorial Union",
+	"destination": "Mark G. Yudof Hall",
+	"coordinates": {[
+		{ "latitude": 44.972000, "longitude": -93.235794},
+		{ "latitude": 44.972000, "longitude": -93.235062},
+		{ "latitude": 44.972330, "longitude": -93.235062},
+		{ "latitude": 44.972330, "longitude": -93.235360},
+		{ "latitude": 44.972658, "longitude": -93.235349}
+	]},
+	"images": [
+		{ "src": "coffman_yudof_1", "desc": "This door in the Coffman Memorial Union basement leads to the East River Road Garage."},
+		{ "src": "coffman_yudof_2", "desc": "The East River Road Garage has stairs and elevators across these rows of parking. Notice the sign indicating the direction of the elevators."},
+		{ "src": "coffman_yudof_3", "desc": "The East River Road Garage elevators and stairs exit at this point." }
+	],
+	"instructions": [
+		"Go to the basement floor of Coffman Memorial Union. There are elevators, stairs, and escalators.",
+		"Follow the signs for the East River Road Garage by going south. At the base of the second set of escalators is a door to the garage.",
+		"Enter and take the stairs or elevator to the garage.",
+		"The garage has a barrier looping left around the rows of parking. Walk around the barrier to the elevator lobby or take the stairs.",
+		"Exit one level up on the first floor. The elevator lobby is inside Yudof Hall, but does not have access to its residential area. Exit the lobby and the residential area of Yudof Hall will be around the left corner."
+	]
+}
