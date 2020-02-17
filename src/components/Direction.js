@@ -1,19 +1,41 @@
-import React from 'react';
-import { FlatList, Text, View, StyleSheet, Image } from 'react-native';
-import assets from '../assets/assets.js';
+import React, { Component } from 'react';
+import { FlatList, ActivityIndicator, Text, View, StyleSheet, Image } from 'react-native';
 
 export default class Direction extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { isLoading: true };
+	}
+
+	componentDidMount() {
+		return fetch(this.props.uri)
+			.then(response => response.json())
+			.then(responseJson => {
+				this.setState({
+					isLoading: false,
+					data: responseJson,
+				})
+			})
+			.catch(error => console.error(error));
+	}
+
 	render() {
-		var images = assets.images;
+		if (this.state.isLoading) {
+			return (
+				<View style={{flex: 1, padding: 20}}>
+					<ActivityIndicator/>
+				</View>
+			);
+		}
 		return (
 			<View>
-				<Text style={styles.title}>Getting from {this.props.origin} to {this.props.destination}</Text>			
+				<Text style={styles.title}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
 				<FlatList
-					data={this.props.directions}
-					renderItem={({item, index}) => <Text style={styles.item}>{index}. {item}</Text>}
+					data={this.state.data.instructions}
+					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
 				/>
 				<FlatList
-					data={this.props.images}
+					data={this.state.data.images}
 					renderItem={({item}) => 
 						<View>
 							<Image
