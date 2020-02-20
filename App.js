@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font';
 import Direction from './src/components/Direction';
+import styles from './src/style';
 
 const url = 'https://sase-labs-2020.github.io/assets/directions/coffman_yudof.json'
 
 export default class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			loaded: false,
+		}
+	}
+
+	async componentDidMount() {
+		await Font.loadAsync({
+			'neutraface': require('./assets/fonts/NeutraText-Bold.otf'),
+			'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
+		});
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -16,11 +32,3 @@ export default class App extends Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	container: {
-    		flex: 1,
-    		justifyContent: 'center',
-    		alignItems: 'center',
-    		backgroundColor: '#ffcc33',
-  	}
-});
