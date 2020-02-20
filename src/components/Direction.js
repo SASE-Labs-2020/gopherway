@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, Text, View, StyleSheet, Image } from 'react-native';
+import { FlatList, ActivityIndicator, Text, View, ScrollView, StyleSheet, Image } from 'react-native';
+import styles from '../style';
 
 export default class Direction extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { isLoading: true };
+		this.state = { isLoading: true, scrollable: false };
 	}
 
 	componentDidMount() {
@@ -28,16 +29,13 @@ export default class Direction extends Component {
 			);
 		}
 		return (
-			<View>
-				<Text style={styles.title}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
+			<ScrollView>
+				<Text style={styles.heading}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
 				<FlatList
-					data={this.state.data.instructions}
-					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
-				/>
-				<FlatList
+					scrollEnabled={this.state.scrollable}
 					data={this.state.data.images}
 					renderItem={({item}) => 
-						<View>
+						<View style={styles.container}>
 							<Image
 								style={styles.image}
 								source={item.src}
@@ -46,23 +44,12 @@ export default class Direction extends Component {
 						</View>
 					}
 				/>
-			</View>
+				<FlatList
+					scrollEnabled={this.state.scrollable}
+					data={this.state.data.instructions}
+					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
+				/>
+			</ScrollView>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	title: {
-    		margin: 24,
-    		fontSize: 22,
-    		fontWeight: 'bold',
-  	},
-	item: {
-		padding: 10,
-		fontSize: 14,
-	},
-	image: {
-		resizeMode: "contain",
-		padding: 15,
-	}
-});
