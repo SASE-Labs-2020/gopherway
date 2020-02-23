@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, Text, View, ScrollView, StyleSheet, Image} from 'react-native';
+import {ActivityIndicator, FlatList, Image, Picker, ScrollView, Text, View} from 'react-native';
 import styles from '../style';
 
 export default class RouteSelection extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { isLoading: true, scrollable: false };
-	}
+		this.state = {isLoading: true, scrollable: false };//Initial state
+	}//Called in App.js
 
 	componentDidMount() {
 		return fetch(this.props.uri)
@@ -18,7 +18,7 @@ export default class RouteSelection extends Component {
 				})
 			})
 			.catch(error => console.error(error));
-	}
+	}//Need if taking data from json (api, data storage on the server), like images that aren't the logo, stuff that changes
 
 	render() {
 		if (this.state.isLoading) {
@@ -28,9 +28,9 @@ export default class RouteSelection extends Component {
 				</View>
 			);
 		}
-		
+		//Ones in <> are js, types of components
 		return (
-			<ScrollView>
+			<View>
 				<Text style={styles.heading}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
 				<FlatList
 					scrollEnabled={this.state.scrollable}
@@ -50,7 +50,7 @@ export default class RouteSelection extends Component {
 					data={this.state.data.instructions}
 					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
 				/>
-			</ScrollView>
+			</View>
 		);
 	}
 }
