@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Text, View, ScrollView, StyleSheet, Image} from 'react-native';
 import styles from '../style';
 
-export default class RouteSelection extends Component {
+export default class Direction extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { isLoading: true, scrollable: false };

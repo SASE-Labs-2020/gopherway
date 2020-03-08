@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ActivityIndicator, Image, Button, Text, View} from 'react-native';
+import {ActivityIndicator, Image, Button, Text, View, FlatList} from 'react-native';
 import styles from '../style';
 
 export default class StartMenu extends Component {
@@ -31,24 +31,36 @@ export default class StartMenu extends Component {
 		//Ones in <> are js, types of components
 		return (
 			<View>
-				<Text style={styles.heading}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
+				<Text style={styles.heading}>Tap the text to choose your campus</Text>
 				<FlatList
-					scrollEnabled={this.state.scrollable}
 					data={this.state.data.images}
-					renderItem={({item}) => 
-						<View style={styles.container}>
-							<Image
-								style={styles.image}
-								source={item.src}
-							/>
-							<Text style={styles.item}>{item.desc}</Text>
-						</View>
+					renderItem={({westBank}) => 
+					<View style={styles.container}>
+						<Image
+							style={styles.image}
+							source={westBank.src}
+						/>
+						<Button style={styles.item,}>{Button={{title: West Bank,color? '#ffcc33'}</Text>
+					</View>
 					}
-				/>
-				<FlatList
-					scrollEnabled={this.state.scrollable}
-					data={this.state.data.instructions}
-					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
+					renderItem={({eastBank}) => 
+					<View style={styles.container}>
+						<Image
+							style={styles.image}
+							source={eastBank.src}
+						/>
+						<Text style={styles.item}>East Bank</Text>
+					</View>
+					}
+					renderItem={({sPCampus}) => 
+					<View style={styles.container}>
+						<Image
+							style={styles.image}
+							source={sPCampus.src}
+						/>
+						<Text style={styles.item}>Saint Paul</Text>
+					</View>
+					}
 				/>
 			</View>
 		);
