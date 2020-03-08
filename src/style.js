@@ -57,7 +57,14 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	button: {
-
+		width: 50,
+		height: 20,
+		alignItems: "center",
+		fontFamily: 'open-sans',
+		fontSize: 12,
+		backgroundColor: colors.maroon,
+		textColor: colors.gold,
+		padding: 8,
 	}
 });
 
