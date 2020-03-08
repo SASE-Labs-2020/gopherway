@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {ActivityIndicator, FlatList, Image, Picker, ScrollView, Text, View, Button} from 'react-native';
+import { Dropdown } from 'react-native-material-dropdown';
 import styles from '../style';
 import colors from '../style';
 
@@ -20,50 +21,31 @@ export default class RouteSelection extends Component {
 			})
 			.catch(error => console.error(error));
 	}//Need if taking data from json (api, data storage on the server), like images that aren't the logo, stuff that changes
-
-	renderPicker(chooserType){
-		if (chooserType == "Building"){
-			<Picker
-				enabled: true
-				accessibilityRole: "combobox"
-				selectedValue = {this.state.building}
-				style ={{padding: 10 , fontSize: 18, fontFamily:'open-sans', backgroundColor: colors.gold, color: colors.maroon, alignItems: 'left', height: 50, width: 100}}
-				onValueChange{(/*???*/,/*???*/) =>/*List expands*/this.setState({/*???*/: /*???*/)}
-			>
-			</Picker>
-		} else if(chooserType == "Floor") {
-			<Picker
-				enabled: true
-				accessibilityRole: "combobox"
-				selectedValue = {this.state.Flr}
-				style ={{padding: 10 , fontSize: 16, fontFamily:'open-sans', backgroundColor: colors.gold, color: colors.maroon, alignItems: 'left', height: 50, width: 75}}
-				onValueChange{(/*???*/, /*???*/) =>/*List expands*/this.setState({/*???*/: /*???*/)}>
-			</Picker>	
-				}
-		}
 			
-	render() {
-		if (this.state.isLoading) {
+	render() 
+	{
+		let buildingList =
+		[
+			{value: 'Building 1',},
+			{value: 'Building 2'}
+		];
+		let floorList =
+		[
+			{value: '1',}, {value: '2'}, {value: '3'}, {value: '4'}, {value: '5'}
+		];
+		if (this.state.isLoading) 
+		{
 		return (
 			<View>
 				<Text style={styles.heading}>Pick Your Route</Text>			
-				<Text style={color.colors.gold, fontSize: 16, fontFamily: 'open-sans'}> Starting Point </Text>
-				this.renderPicker("Building");
-				this.renderPicker("Floor");
-				<Text style={color.colors.gold, fontSize: 16, fontFamily: 'open-sans'}> Ending Point </Text>
-				this.renderPicker("Building");
-				this.renderPicker("Floor");
-				<Button style = {styles.image} onClick={()=>/*Submits data*/}>
-
-				<Button/>
+				<Text style={styles.subHeading}> Starting Point </Text>
+				<Dropdown label='Building' style={styles.dropdownLg} data={this.buildingList}/>
+				<Dropdown label='Floor' style={styles.dropdownSm} data={this.floorList}/>
+				<Text style={styles.subHeading}> Ending Point </Text>
+				<Dropdown label='Building' style={styles.dropdownLg} data={this.buildingList}/>
+				<Dropdown label='Floor' style={styles.dropdownSm} data={this.floorList}/>
+				<Button style = {styles.image} onClick={()=>/*Submits data*/}/>
 			</View>
 		);
 		}
 	}
-/*What's the difference between render and return*/
-/*What does "View" encompass? If it's the whole screen how do I set the background color*/
-/*How will the top and bottom that are on multiple menus be implemented*/
-/*I don't understand onValueChange */
-/*Where does the list the Picker has come from? How do I assign it?*/
-/*Difference between =,:, and is there even == */
-/*How do I do a string as an input for a constructor?*/
