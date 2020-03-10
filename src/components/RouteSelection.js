@@ -119,7 +119,7 @@ export default class RouteSelection extends Component
 	constructor(props) 
 	{
 		super(props);
-		this.state = {isLoading: true, scrollable: false};//Initial state
+		this.state = {isLoading: false, scrollable: false};//Initial state
 	}//Called in App.js
 			
 	routeSubmit()
@@ -146,14 +146,13 @@ export default class RouteSelection extends Component
 			{value: '13',}, {value: '14',}, {value: '15',}, {value: '16',},
 			{value: '17',}, {value: '18',}
 		];
-	
+		
 		if (this.state.isLoading) {
 			return (
 				<View style={{flex: 1, padding: 20}}>
 					<ActivityIndicator/>
 				</View>
 			);
-		}
 
 		return
 		(
