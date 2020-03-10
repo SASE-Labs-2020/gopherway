@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 	subHeading:{
 		fontFamily: 'neutraface',
 		fontSize: 18,
-		alignItems: 'left',
+		alignItems: 'flex-start',
 		padding: 15,
 		color: colors.gold,
 	},
@@ -39,21 +39,21 @@ const styles = StyleSheet.create({
 	dropdownSm : {
 		width: 75,
 		height: 20,
-		alignItems: "left",
+		alignItems: "flex-start",
 		fontFamily: 'open-sans',
 		fontSize: 14,
 		backgroundColor: colors.gold,
-		textColor: colors.maroon,
+		color: colors.maroon,
 		padding: 8,
 	},
 	dropdownLg : {
 		width: 100,
 		height: 25,
-		alignItems: "left",
+		alignItems: "flex-start",
 		fontFamily: 'open-sans',
 		fontSize: 16,
 		backgroundColor: colors.gold,
-		textColor: colors.maroon,
+		color: colors.maroon,
 		padding: 10,
 	},
 	button: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'open-sans',
 		fontSize: 12,
 		backgroundColor: colors.maroon,
-		textColor: colors.gold,
+		color: colors.gold,
 		padding: 8,
 	}
 });
