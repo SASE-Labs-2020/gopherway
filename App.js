@@ -20,6 +20,7 @@ export default class App extends Component {
 			'neutraface': require('./assets/fonts/NeutraText-Bold.otf'),
 			'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
 		});
+		this.setState = {loaded: true,}
 	}
 
 	render() {
