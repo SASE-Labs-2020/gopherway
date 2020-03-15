@@ -147,12 +147,14 @@ export default class RouteSelection extends Component
 			{value: '17',}, {value: '18',}
 		];
 		
-		if (this.state.isLoading) {
+		if (this.state.isLoading) 
+		{
 			return (
 				<View style={{flex: 1, padding: 20}}>
 					<ActivityIndicator/>
 				</View>
 			);
+		}
 
 		return
 		(
