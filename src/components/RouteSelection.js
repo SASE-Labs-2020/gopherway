@@ -160,11 +160,11 @@ export default class RouteSelection extends Component
 			<View>
 				<Text style={styles.heading}>Pick Your Route</Text>			
 				<Text style={styles.subHeading}>Starting Point</Text>
-				<Dropdown label='Building' style={styles.dropdownLg} data={this.buildingList}/>
-				<Dropdown label='Floor' style={styles.dropdownSm} data={this.floorList}/>
+				<Dropdown label='Building' style={styles.dropdownLg} data={buildingList}/>
+				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
 				<Text style={styles.subHeading}> Ending Point </Text>
-				<Dropdown label='Building' style={styles.dropdownLg} data={this.buildingList}/>
-				<Dropdown label='Floor' style={styles.dropdownSm} data={this.floorList}/>
+				<Dropdown label='Building' style={styles.dropdownLg} data={buildingList}/>
+				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
 				<Button style = {styles.image} onClick={()=>this.routeSubmit}/>
 			</View>
 		);
