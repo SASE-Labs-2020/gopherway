@@ -156,8 +156,7 @@ export default class RouteSelection extends Component
 			);
 		}
 
-		return
-		(
+		return (
 			<View>
 				<Text style={styles.heading}>Pick Your Route</Text>			
 				<Text style={styles.subHeading}>Starting Point</Text>
