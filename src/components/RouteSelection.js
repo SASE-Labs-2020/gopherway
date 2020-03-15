@@ -4,25 +4,6 @@ import { Dropdown } from 'react-native-material-dropdown';
 import styles from '../style';
 import colors from '../style';
 
-const westBankList = 
-[
-	{value: '19th Ave Ramp',},
-	{value: 'Andersen Library',},
-	{value: 'Anderson Hall',},
-	{value: 'Blegen Hall',},
-	{value: 'Carlson School of Management',},
-	{value: 'Ferguson Hall',},
-	{value: 'Hanson Hall',},
-	{value: 'Heller Hall',},
-	{value: 'HHH Center',},
-	{value: 'Mondale Hall',},
-	{value: 'Rarig Center',},
-	{value: 'Social Sciences',},
-	{value: 'Ted Mann Concert Hall',},
-	{value: 'Willey Hall',},
-	{value: 'Wilson Library',}
-];
-
 const eastBankList =
 [
 	{value: '10 Churchl',},
@@ -75,40 +56,6 @@ const eastBankList =
 	{value: 'Yudof Hall',}
 ];
 
-const saintPaulList = 
-[
-	{value: 'Alderman Hall',},
-	{value: 'Animal Science/Veterinary Medicine',},
-	{value: 'Bailey Hall',},
-	{value: 'Biological Science Center',},
-	{value: 'Borlaug Hall',},
-	{value: 'Christensen Lab',},
-	{value: 'Coffey Hall',},
-	{value: 'Continuing Education & Conference Center',},
-	{value: 'Dining Center',},
-	{value: 'Ecology',},
-	{value: 'Gortner Lab',},
-	{value: 'Green Hall',},
-	{value: 'Hayes Hall',},
-	{value: 'Hodson Hall',},
-	{value: 'Kaufert Lab',},
-	{value: 'Learning & Environmental Science',},
-	{value: 'Lewis Hospital for Companion Animals',},
-	{value: 'Magrath Library',},
-	{value: 'McNeal Hall',},
-	{value: 'North Central Forest Exp. Sta.',},
-	{value: 'Peters Hall',},
-	{value: 'Ruttan Hall',},
-	{value: 'Skok Hall',},
-	{value: 'Snyder Hall',},
-	{value: 'Soil Science',},
-	{value: 'St. Paul Student Center',},
-	{value: 'Stakman Hall',},
-	{value: 'Veterinary Diagnosis Lab',},
-	{value: 'Veterinary Medical Center South',},
-	{value: 'Veterinary Science',}
-];
-
 const nAFloors =
 [
 	{value: 'Not Applicable, only one floor available'}
@@ -129,13 +76,6 @@ export default class RouteSelection extends Component
 
 	render() 
 	{
-		if(0==0){
-		let buildingList = eastBankList;
-		} else if(0==1){
-			let buildingList = westBankList;
-		} else if(0==2){
-			let buildingList = saintPaulList;
-		}
 
 		let floorList =
 		[
@@ -160,10 +100,10 @@ export default class RouteSelection extends Component
 			<View>
 				<Text style={styles.heading}>Pick Your Route</Text>			
 				<Text style={styles.subHeading}>Starting Point</Text>
-				<Dropdown label='Building' style={styles.dropdownLg} data={buildingList}/>
+				<Dropdown label='Building' style={styles.dropdownLg} data={eastBankList}/>
 				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
 				<Text style={styles.subHeading}> Ending Point </Text>
-				<Dropdown label='Building' style={styles.dropdownLg} data={buildingList}/>
+				<Dropdown label='Building' style={styles.dropdownLg} data={eastBankList}/>
 				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
 				<Button style = {styles.image} onClick={()=>this.routeSubmit}/>
 			</View>
