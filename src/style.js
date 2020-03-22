@@ -18,6 +18,13 @@ const styles = StyleSheet.create({
 		color: colors.gold,
 		backgroundColor: colors.maroon
 	},
+	subHeading:{
+		fontFamily: 'neutraface',
+		fontSize: 18,
+		alignItems: 'flex-start',
+		padding: 15,
+		color: colors.gold,
+	},
 	item: {
 		padding: 10,
 		fontSize: 16,
@@ -27,6 +34,32 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 300,
 		resizeMode: 'contain',
+		padding: 8,
+	},
+	dropdownSm : {
+		alignItems: "flex-start",
+		fontFamily: 'open-sans',
+		fontSize: 14,
+		backgroundColor: colors.gold,
+		color: colors.maroon,
+		paddingLeft: 6,
+	},
+	dropdownLg : {
+		alignItems: "flex-start",
+		fontFamily: 'open-sans',
+		fontSize: 16,
+		backgroundColor: colors.gold,
+		color: colors.maroon,
+		paddingLeft: 6,
+	},
+	button: {
+		width: 50,
+		height: 20,
+		alignItems: "center",
+		fontFamily: 'open-sans',
+		fontSize: 12,
+		backgroundColor: colors.maroon,
+		color: colors.gold,
 		padding: 8,
 	}
 });

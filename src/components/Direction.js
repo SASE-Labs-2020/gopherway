@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, Text, View, ScrollView, StyleSheet, Image } from 'react-native';
+import { FlatList, ActivityIndicator, Text, View, ScrollView, StyleSheet, Image} from 'react-native';
 import styles from '../style';
 
 export default class Direction extends Component {
@@ -28,6 +28,7 @@ export default class Direction extends Component {
 				</View>
 			);
 		}
+		
 		return (
 			<ScrollView>
 				<Text style={styles.heading}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
