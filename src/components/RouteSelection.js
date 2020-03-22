@@ -105,7 +105,7 @@ export default class RouteSelection extends Component
 				<Text style={styles.subHeading}> Ending Point </Text>
 				<Dropdown label='Building' style={styles.dropdownLg} data={eastBankList}/>
 				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
-				<Button style = {styles.image} onClick={()=>this.routeSubmit}/>
+				<Button title='submit' style = {styles.button} onClick={()=>this.routeSubmit}/>
 			</View>
 		);
 	}

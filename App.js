@@ -20,10 +20,19 @@ export default class App extends Component {
 			'neutraface': require('./assets/fonts/NeutraText-Bold.otf'),
 			'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
 		});
-		this.setState = {loaded: true,}
+		this.setState({loaded: true});
 	}
 
 	render() {
+		if (!this.state.loaded) {
+			return (
+				<View>
+					<ActivityIndicator/>
+				</View>
+			);
+		}
+
+
 		return (
 			<View style={styles.container}>
 				<RouteSelection/>
