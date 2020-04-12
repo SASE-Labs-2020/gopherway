@@ -6,7 +6,7 @@ import styles from '../style';
 export default class GraphEdge extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { isLoading: true, scrollable: false };
+		this.state = { isLoading: true, scrollable: false, coordArray: []};
 		region: new AnimatedRegion({latitude: 44.98295, longitude: -93.2325, latitudeDelta: 0.00415,longitudeDelta: 0.0054,});
 	}
 
@@ -15,7 +15,7 @@ export default class GraphEdge extends Component {
 	  }
 
 	componentDidMount() {
-		return fetch(this.props.uri)
+		return fetch(this.props.uri)//pull graph.json
 			.then(response => response.json())
 			.then(responseJson => {
 				this.setState({
@@ -24,6 +24,10 @@ export default class GraphEdge extends Component {
 				})
 			})
 			.catch(error => console.error(error));
+			
+			//look at output, compare pairs
+			coordArray = this.state.data.coordinates;
+
 	}
 
 	render() {
@@ -38,8 +42,8 @@ export default class GraphEdge extends Component {
 		return (
 			<MapView region={this.state.region} onRegionChange={this.onRegionChange} >
 				<Overlay image={uri='https://sase-labs-2020.github.io/assets/images/eastBankOverlay.png'} bounds={[[44.9788, -93.2379], [44.9705, -93.2271]]}/>
-				<Polyline coordinates={this.state.data.directions}/>
+				<Polyline coordinates={}/>
 			</MapView>
 		);
 	}
-}
+}graph["Coffman Memorial Union"]["Mark G. Yudof Hall"]
