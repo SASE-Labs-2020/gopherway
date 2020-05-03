@@ -7,7 +7,8 @@ export default class Direction extends Component {
 		super(props);
 		this.state = { isLoading: true, scrollable: false };
 	}
-
+	
+	
 	componentDidMount() {
 		return fetch(this.props.uri)
 			.then(response => response.json())
@@ -30,27 +31,273 @@ export default class Direction extends Component {
 		}
 		
 		return (
-			<ScrollView>
-				<Text style={styles.heading}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
-				<FlatList
-					scrollEnabled={this.state.scrollable}
-					data={this.state.data.images}
-					renderItem={({item}) => 
-						<View style={styles.container}>
-							<Image
-								style={styles.image}
-								source={item.src}
-							/>
-							<Text style={styles.item}>{item.desc}</Text>
-						</View>
-					}
-				/>
-				<FlatList
-					scrollEnabled={this.state.scrollable}
-					data={this.state.data.instructions}
-					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
-				/>
-			</ScrollView>
+			<View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={()=>{alert("building info")}}
+            title="Keller"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Akerman"
+          />
+        </View>
+        <View style={styles.alternativeLayoutButtonContainer}>
+          <Button
+            onPress={()=>{alert("building info")}}
+            title="Amundson"
+          />
+          <Button
+            onPress={()=>{alert("building info")}}
+            title="Boynton"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Children's Rehab"
+          />
+      </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Civil Engineering"
+          />
+	</View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Coffman"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Diehl Hall"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Folwell "
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Ford"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Graduate Hotel"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="HSEC"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Jackson"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Johnston"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Keller"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Kolthoff"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Lind Hall"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Mayo Auditorium"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Mayo Building"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="MCB"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="McNamara Alumni Center"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="MechE"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Moss Tower"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Morrill"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Murphy"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Nils-Hasselmo"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Nolte Center"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Nolte Ctr. Garage"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Northrop"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Northrop Garage"
+          />
+		    </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="P-W Building"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Rapson "
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Shepherd labs"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Smith"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Tate Hall"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Transportation & safety building"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="UMN Medical Center"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="University ave ramp"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Variety Club Res Ctr"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Vincent Hall"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Walter Library"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Wash-Ave Parking Ramp"
+          />
+		        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Weaver-Densford"
+          /></View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Williamson"
+          /></View>
+        <View style={styles.buttonContainer}>
+          <Button
+           onPress={()=>{alert("building info")}}
+            title="Yudof Hall"
+          />
+		    
 		);
 	}
 }
