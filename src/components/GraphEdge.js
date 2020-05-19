@@ -3,6 +3,7 @@ import {Text, View, ScrollView, StyleSheet} from 'react-native';
 import {MapView, Overlay, Geojson, Polyline, Marker, Callout, Polygon, Circle, AnimatedRegion, Animated} from 'react-native-maps';
 import styles from '../style';
 
+
 export default class GraphEdge extends Component {
 	constructor(props) {
 		super(props);
