@@ -15,7 +15,9 @@ export default class RouteSelection extends Component
 			
 	routeSubmit()
 	{
-		Alert.alert('Wow the route would be submitted but it is not coded yet lol');
+		routePts = [startBuilding,endBuilding]
+		return routePts
+		Alert.alert('Route points submitted');
 	}
 
 	render() 
@@ -35,8 +37,8 @@ export default class RouteSelection extends Component
 				<Text style={styles.heading}>Pick Your Route</Text>			
 				<Text style={styles.subHeading}>Starting Building</Text>
 				<Picker style={styles.dropdownLg}
-					selStart={this.state.PickerSelectedVal}
-					onValueChange={(itemValue, itemPosition) => this.setState({PickerSelectedVal: itemValue})} >
+					startBuilding={this.state.PickerSelectedVal}
+					onValueChange={(itemValue, itemPosition) => this.setState({PickerSelectedVal: itemValue})}>
 					<Picker.Item label="10 Church St" value="10 Church St"/>
 					<Picker.Item label="Akerman Hall" value="Akerman Hall"/>
 					<Picker.Item label="Amundson Hall" value="Amundson Hall"/>
@@ -85,10 +87,11 @@ export default class RouteSelection extends Component
 					<Picker.Item label="Williamson Hall" value="Williamson Hall"/>
 					<Picker.Item label="Yudof Hall" value="Yudof Hall"/>
 					</Picker>
+
 				<Text style={styles.subHeading}> Ending Building </Text>
 				<Picker style={styles.dropdownLg} 
-					selEnd={this.state.PickerSelectedVal}
-					onValueChange={(itemValue, itemPosition) => this.setState({PickerSelectedVal: itemValue})}/>
+					endBuilding={this.state.PickerSelectedVal}
+					onValueChange={(itemValue, itemPosition) => this.setState({PickerSelectedVal: itemValue})}>
 					<Picker.Item label="10 Church St" value="10 Church St"/>
 					<Picker.Item label="Akerman Hall" value="Akerman Hall"/>
 					<Picker.Item label="Amundson Hall" value="Amundson Hall"/>
@@ -136,16 +139,13 @@ export default class RouteSelection extends Component
 					<Picker.Item label="Weaver-Densford Hall" value="Weaver-Densford Hall"/>
 					<Picker.Item label="Williamson Hall" value="Williamson Hall"/>
 					<Picker.Item label="Yudof Hall" value="Yudof Hall"/>
-				</Picker>
-				<Button title='submit' style = {styles.button} onClick={()=>this.routeSubmit}/>
+					</Picker>
+
+				<Button title="Submit" style={styles.button} onPress={()=>this.routeSubmit}/>
 			</View>
 		);
 	}
 }
 /*Eventually, I would want this component to be able to use previously 
 input information (which campus was chosen) before running this to
-display certian arrays of info in the dropdown */
-/*Also I would like to make it so the building 
-has to be chosen first, and based on that input
-the floor selection would change (access certain
-array values or run nAFloors under that dropdown)*/
+display certain arrays of info in the dropdown */

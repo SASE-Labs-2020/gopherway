@@ -6,8 +6,6 @@ import styles from './src/style';
 import RouteSelection from './src/components/RouteSelection';
 import GraphEdge from './src/components/GraphEdge';
 
-const url = 'https://sase-labs-2020.github.io/assets/directions/coffman_yudof.json'
-
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -36,9 +34,9 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<GraphEdge uri = {url}/>
+				<RouteSelection/>
 			</View>
 		);
 	}
-}
+}//<GraphEdge routePts = {RouteSelection.routePts}/>
 
