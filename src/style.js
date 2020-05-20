@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.maroon,
 		color: colors.gold,
 		padding: 8,
+		flexDirection: 'row',
+    	justifyContent: 'space-between',
 	}
 });
 
