@@ -5,18 +5,19 @@ import styles from '../style';
 
 
 export default class GraphEdge extends Component {
-	constructor(props) {
-		super(props);
+	constructor(routeInfo) {
 		this.state = { isLoading: true, scrollable: false, coordArray: []};
 		region: new AnimatedRegion({latitude: 44.98295, longitude: -93.2325, latitudeDelta: 0.00415,longitudeDelta: 0.0054,});
+		graph='https://sase-labs-2020.github.io/assets/graph.json';
 	}
 
 	onRegionChange(region) {
 		this.setState({ region });
 	  }
 
-	componentDidMount() {
-		return fetch(this.props.uri)//pull graph.json
+	getRouteInfo(){
+		uri='https://sase-labs-2020.github.io/assets/directions/coffman_yudof.json'
+		return fetch(this.routeInfo.uri)
 			.then(response => response.json())
 			.then(responseJson => {
 				this.setState({
@@ -25,7 +26,19 @@ export default class GraphEdge extends Component {
 				})
 			})
 			.catch(error => console.error(error));
-			
+	}
+
+	componentDidMount() {
+
+		return fetch(this.props.graph)
+		.then(response => response.json())
+		.then(responseJson => {
+			this.setState({
+				isLoading: false,
+				data: responseJson,
+			})
+		})
+		.catch(error => console.error(error));
 			//look at output, compare pairs
 			coordArray = this.state.data.coordinates;
 
@@ -43,6 +56,7 @@ export default class GraphEdge extends Component {
 		return (
 			<MapView region={this.state.region} onRegionChange={this.onRegionChange} >
 				<Overlay image={uri='https://sase-labs-2020.github.io/assets/images/eastBankOverlay.png'} bounds={[[44.9788, -93.2379], [44.9705, -93.2271]]}/>
+
 				<Polyline coordinates={}/>
 			</MapView>
 		);
