@@ -6,9 +6,10 @@ import styles from '../style';
 
 export default class GraphEdge extends Component {
 	constructor(routePts) {
+		super(routePts)
 		this.state = { isLoading: true, scrollable: false, coordArray: []};
-		region: new AnimatedRegion({latitude: 44.98295, longitude: -93.2325, latitudeDelta: 0.00415,longitudeDelta: 0.0054,});
-		graph='https://sase-labs-2020.github.io/assets/graph.json';
+		var region= new AnimatedRegion({latitude: 44.98295, longitude: -93.2325, latitudeDelta: 0.00415,longitudeDelta: 0.0054,});
+		var graph='https://sase-labs-2020.github.io/assets/graph.json';
 	}
 
 	onRegionChange(region) {
@@ -16,9 +17,8 @@ export default class GraphEdge extends Component {
 	  }
 
 	componentDidMount(){
-		filename='coffman_yudof.json'//file from ./directions if origin == routePts[0] && destination == routePts[1]
-		uri='https://sase-labs-2020.github.io/assets/directions/'+ filename
-		return fetch(this.routePts.uri)
+		var filename='coffman_yudof.json'//file from ./directions if origin == routePts[0] && destination == routePts[1]
+		return fetch('https://sase-labs-2020.github.io/assets/directions/'+ filename)
 			.then(response => response.json())
 			.then(responseJson => {
 				this.setState({
@@ -41,8 +41,8 @@ export default class GraphEdge extends Component {
 		
 		return (
 			<MapView region={this.state.region} onRegionChange={this.onRegionChange} >
-				<Overlay image={uri='https://sase-labs-2020.github.io/assets/images/eastBankOverlay.png'} bounds={[[44.9788, -93.2379], [44.9705, -93.2271]]}/>
-				<Polyline coordinates={coordArray}/>
+				<Overlay image={'https://sase-labs-2020.github.io/assets/images/eastBankOverlay.png'} bounds={[[44.9788, -93.2379], [44.9705, -93.2271]]}/>
+				<Polyline coordinates={this.coordArray}/>
 			</MapView>
 		);
 	}
