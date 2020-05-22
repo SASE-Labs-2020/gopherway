@@ -6,6 +6,7 @@ import styles from './src/style';
 import RouteSelection from './src/components/RouteSelection';
 import GraphEdge from './src/components/GraphEdge';
 
+const url = 'https://sase-labs-2020.github.io/assets/directions/graduate_mcNamara.json'
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -34,9 +35,10 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<RouteSelection/>
+				<Direction uri={url}/>
 			</View>
 		);
 	}
 }//<GraphEdge routePts = {RouteSelection.routePts}/>
+//<RouteSelection/>
 
