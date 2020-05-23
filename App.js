@@ -35,10 +35,10 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<Direction uri={url}/>
+				<RouteSelection/>
 			</View>
 		);
 	}
 }//<GraphEdge routePts = {RouteSelection.routePts}/>
-//<RouteSelection/>
+//<Direction uri={url}/>
 
