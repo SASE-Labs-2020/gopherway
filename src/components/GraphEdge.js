@@ -41,7 +41,6 @@ export default class GraphEdge extends Component {
 		
 		return (
 			<MapView region={this.state.region} onRegionChange={this.onRegionChange} >
-				<Overlay image={'https://sase-labs-2020.github.io/assets/images/eastBankOverlay.png'} bounds={[[44.9788, -93.2379], [44.9705, -93.2271]]}/>
 				<Polyline coordinates={this.coordArray}/>
 			</MapView>
 		);
