@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Picker} from 'react-native';
 import * as Font from 'expo-font';
 import Direction from './src/components/Direction';
 import styles from './src/style';
@@ -35,10 +35,10 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<RouteSelection/>
+				<Direction uri={url}/>
 			</View>
 		);
 	}
-}//<GraphEdge routePts = {RouteSelection.routePts}/>
-//<Direction uri={url}/>
+}//<RouteSelection/>
+//<GraphEdge routePts = {RouteSelection.routePts}/>
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
-import {MapView, Overlay, Geojson, Polyline, Marker, Callout, Polygon, Circle, AnimatedRegion, Animated} from 'react-native-maps';
+import {MapView, Polyline, AnimatedRegion} from 'react-native-maps';
 import styles from '../style';
 
 

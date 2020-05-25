@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 10908,
-  "expoServerNgrokUrl": "https://qe-v6x.anonymous.gopherway.exp.direct",
-  "packagerNgrokUrl": "https://packager.qe-v6x.anonymous.gopherway.exp.direct",
-  "ngrokPid": 3588,
-  "webpackServerPort": null
+  "packagerPid": 17956,
+  "expoServerNgrokUrl": "https://mx-xgm.anonymous.gopherway.exp.direct",
+  "packagerNgrokUrl": "https://packager.mx-xgm.anonymous.gopherway.exp.direct",
+  "ngrokPid": 16108,
+  "webpackServerPort": 19006
 }
