@@ -6,13 +6,13 @@ import styles from './src/style';
 import RouteSelection from './src/components/RouteSelection';
 import GraphEdge from './src/components/GraphEdge';
 
-const url = 'https://sase-labs-2020.github.io/assets/directions/graduate_mcNamara.json'
+const url = 'https://sase-labs-2020.github.io/assets/directions/graduate_mcNamara.json';
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			loaded: false,
-		}
+		};
 	}
 
 	async componentDidMount() {
