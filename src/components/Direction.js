@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, Text, View, ScrollView, StyleSheet, Image} from 'react-native';
+import { FlatList, ActivityIndicator, Text, View, SafeAreaView, ScrollView, StyleSheet, Image} from 'react-native';
 import styles from '../style';
 
 export default class Direction extends Component {
@@ -28,27 +28,22 @@ export default class Direction extends Component {
 				</View>
 			);
 		}
-		
+		const new_data = this.state.data.info;
 		return (
 			<ScrollView>
 				<Text style={styles.heading}>Getting from {this.state.data.origin} to {this.state.data.destination}</Text>			
 				<FlatList
 					scrollEnabled={this.state.scrollable}
-					data={this.state.data.images}
+					data={new_data}
 					renderItem={({item}) => 
-						<View style={styles.container}>
-							<Image
-								style={styles.image}
-								source={item.src}
-							/>
-							<Text style={styles.item}>{item.desc}</Text>
-						</View>
+						<SafeAreaView style={styles.container}>
+							<Text>{item.instr}</Text>
+							<Image style={item.src ? styles.image : null} source={item.src}/>
+							<Text>{item.desc}</Text>
+				
+						</SafeAreaView>
 					}
-				/>
-				<FlatList
-					scrollEnabled={this.state.scrollable}
-					data={this.state.data.instructions}
-					renderItem={({item, index}) => <Text style={styles.item}>{index+1}. {item}</Text>}
+					keyExtractor={(item,index) => index.toString()}
 				/>
 			</ScrollView>
 		);
