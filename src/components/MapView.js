@@ -1,8 +1,7 @@
-import React from 'react';
-import MapView from 'react-native-maps';
+import {MapView} from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>

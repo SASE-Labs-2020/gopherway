@@ -63,7 +63,11 @@ const styles = StyleSheet.create({
 		padding: 8,
 		flexDirection: 'row',
     	justifyContent: 'space-between',
-	}
+	},
+	mapStyle: {
+		width: Dimensions.get('window').width,
+		height: Dimensions.get('window').height,
+	  },
 });
 
 export default styles;
