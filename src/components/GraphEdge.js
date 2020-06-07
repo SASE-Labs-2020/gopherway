@@ -34,9 +34,11 @@ export default class GraphEdge extends Component {
 		}
 		
 		return (
-			<MapView initialRegion={this.state.region}>
-				<Polyline coordinates={this.state.coordArray}/>
-			</MapView>
+			<View style={styles.container}>
+				<MapView initialRegion={this.state.region}>
+					<Polyline coordinates={this.state.coordArray}/>
+				</MapView>
+			</View>
 		);
 	}
 }
