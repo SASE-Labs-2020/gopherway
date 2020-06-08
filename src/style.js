@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'; 
+import { StyleSheet, Dimensions } from 'react-native'; 
 
 const colors = {
 	maroon: '#7a0019',
@@ -8,6 +8,7 @@ const colors = {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -63,7 +64,11 @@ const styles = StyleSheet.create({
 		padding: 8,
 		flexDirection: 'row',
     	justifyContent: 'space-between',
-	}
+	},
+	mapStyle: {
+		width: Dimensions.get('window').width,
+		height: Dimensions.get('window').height,
+	  },
 });
 
 export default styles;

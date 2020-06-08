@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View, Picker} from 'react-native';
+import {MapView} from 'react-native-maps';
 import * as Font from 'expo-font';
 import Direction from './src/components/Direction';
 import styles from './src/style';
@@ -35,7 +36,7 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<Direction uri={url}/>
+				<GraphEdge/>
 			</View>
 		);
 	}
