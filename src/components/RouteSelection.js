@@ -1,91 +1,27 @@
 import React, { Component } from 'react';
-import {ActivityIndicator, FlatList, Image, Picker, ScrollView, Text, View, Button, Alert} from 'react-native';
-import { Dropdown } from 'react-native-material-dropdown';
+import {ActivityIndicator, FlatList, Image, ScrollView, Text, View, Button} from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import styles from '../style';
 import colors from '../style';
-
-const eastBankList =
-[
-	{value: '10 Churchl',},
-	{value: 'Akerman Hall',},
-	{value: 'Amundson Hall',},
-	{value: 'Boynton Clinic',},
-	{value: 'Childrens Rehab',},
-	{value: 'Civil Engineering',},
-	{value: 'Coffman Union',},
-	{value: 'Diehl Hall',},
-	{value: 'Dwan Cardio./Masonic Cancer Research Center',},
-	{value: 'East River Road Garage',},
-	{value: 'Folwell Hall',},
-	{value: 'Ford Hall',},
-	{value: 'Graduate Hotel',},
-	{value: 'Hospital Patient/Visitor Ramp',},
-	{value: 'HSEC',},
-	{value: 'Jackson Hall',},
-	{value: 'Johnston Hall',},
-	{value: 'Keller Hall',},
-	{value: 'Kolthoff Hall',},
-	{value: 'Lind Hall',},
-	{value: 'Mayo Auditorium',},
-	{value: 'Mayo Building',},
-	{value: 'MCB',},
-	{value: 'McNamara Alumni',},
-	{value: 'Mechanical Engineering Building',},
-	{value: 'Moos Tower',},
-	{value: 'Morrill Hall',},
-	{value: 'Murphy Hall',},
-	{value: 'Nils-Hasselmo Hall',},
-	{value: 'Nolte Center',},
-	{value: 'Nolte Center Garage',},
-	{value: 'Northrop Auditorium',},
-	{value: 'Northrop Garage',},
-	{value: 'P-W Building',},
-	{value: 'Rapson Hall',},
-	{value: 'Shepherd Labs',},
-	{value: 'Smith Hall',},
-	{value: 'Tate Hall',},
-	{value: 'Transportation & Safety Building',},
-	{value: 'UMN Medical Center',},
-	{value: 'University Avenue Ramp',},
-	{value: 'Variety Club Resource Center',},
-	{value: 'Vincent Hall',},
-	{value: 'Walter Library',},
-	{value: 'Washington Avenue Parking Ramp',},
-	{value: 'Weaver-Densford Hall',},
-	{value: 'Williamson Hall',},
-	{value: 'Yudof Hall',}
-];
-
-const nAFloors =
-[
-	{value: 'Not Applicable, only one floor available'}
-];
 
 export default class RouteSelection extends Component 
 {
 	constructor(props) 
 	{
 		super(props);
-		this.state = {isLoading: false, scrollable: false};//Initial state
+		this.state = {isLoading: false, scrollable: false, campusInput: "East Bank"};//Initial state
 	}//Called in App.js
 			
-	routeSubmit()
+	routeSubmit(start,end)
 	{
-		Alert.alert('Wow the route would be submitted but it is not coded yet lol');
+		var routePts = []
+    	routePts[0] = start;
+		routePts[1] = end;
+		return routePts
 	}
 
 	render() 
 	{
-
-		let floorList =
-		[
-			{value: 'B',}, {value: 'SB',}, {value: 'LC',}, {value: 'T',},
-			{value: '1',}, {value: '2',}, {value: '3',}, {value: '4',},
-			{value: '5',}, {value: '6',}, {value: '7',}, {value: '8',},
-			{value: '9',}, {value: '10',}, {value: '11',}, {value: '12',},
-			{value: '13',}, {value: '14',}, {value: '15',}, {value: '16',},
-			{value: '17',}, {value: '18',}
-		];
 		
 		if (this.state.isLoading) 
 		{
@@ -99,21 +35,114 @@ export default class RouteSelection extends Component
 		return (
 			<View>
 				<Text style={styles.heading}>Pick Your Route</Text>			
-				<Text style={styles.subHeading}>Starting Point</Text>
-				<Dropdown label='Building' style={styles.dropdownLg} data={eastBankList}/>
-				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
-				<Text style={styles.subHeading}> Ending Point </Text>
-				<Dropdown label='Building' style={styles.dropdownLg} data={eastBankList}/>
-				<Dropdown label='Floor' style={styles.dropdownSm} data={floorList}/>
-				<Button title='submit' style = {styles.button} onClick={()=>this.routeSubmit}/>
+				<Text style={styles.subHeading}>Starting Building</Text>
+				<Picker style={styles.dropdownLg}
+					startBuilding={this.state.PickerSelectedVal}
+					onValueChange={(itemValue, itemPosition) => this.setState({PickerSelectedVal: itemValue})}>
+					<Picker.Item label="10 Church St" value="10 Church St"/>
+					<Picker.Item label="Akerman Hall" value="Akerman Hall"/>
+					<Picker.Item label="Amundson Hall" value="Amundson Hall"/>
+					<Picker.Item label="Boynton Clinic" value="Boynton"/>
+					<Picker.Item label="Childrens Rehab" value="Childrens Rehab"/>
+					<Picker.Item label="The Civil Engineering Building" value="Civil Engineering"/>
+					<Picker.Item label="Coffman Union" value="Coffman"/>
+					<Picker.Item label="Diehl Hall" value="Diehl Hall"/>
+					<Picker.Item label="Dwan Cardio./Masonic Cancer Research Center" value="Dwan"/>
+					<Picker.Item label="East River Road Garage" value="East River Road Garage"/>
+					<Picker.Item label="Folwell Hall" value="Folwell Hall"/>
+					<Picker.Item label="Ford Hall" value="Ford Hall"/>
+					<Picker.Item label="The Graduate Hotel" value="The Graduate Hotel"/>
+					<Picker.Item label="Hospital Patient/Visitor Ramp" value="Hospital Patient/Visitor Ramp"/>
+					<Picker.Item label="Jackson Hall" value="Jackson Hall"/>
+					<Picker.Item label="Johnston Hall" value="Johnston Hall"/>
+					<Picker.Item label="Keller Hall" value="Keller Hall"/>
+					<Picker.Item label="Kolthoff Hall" value="Kolthoff Hall"/>
+					<Picker.Item label="Lind Hall" value="Lind Hall"/>
+					<Picker.Item label="Mayo Auditorium" value="Mayo Auditorium"/>
+					<Picker.Item label="Mayo Building" value="Mayo Building"/>
+					<Picker.Item label="MCB" value="MCB"/>
+					<Picker.Item label="McNamara Alumni Center" value="McNamara Alumni Center"/>
+					<Picker.Item label="Mechanical Engineering Building" value="Mechanical Engineering Building"/>
+					<Picker.Item label="Moos Tower" value="Moos Tower"/>
+					<Picker.Item label="Morrill Hall" value="Morrill Hall"/>
+					<Picker.Item label="Murphy Hall" value="Murphy Hall"/>
+					<Picker.Item label="Nils-Hasselmo Hall" value="Nils-Hasselmo Hall"/>
+					<Picker.Item label="Nolte Center" value="Nolte Center"/>
+					<Picker.Item label="Nolte Center Garage" value="Nolte Center Garage"/>
+					<Picker.Item label="Northrop Auditorium" value="Northrop Auditorium"/>
+					<Picker.Item label="Northrop Garage" value="Northrop Garage"/>
+					<Picker.Item label="P-W Building" value="P-W Building"/>
+					<Picker.Item label="Rapson Hall" value="Rapson Hall"/>
+					<Picker.Item label="Shepherd Labs" value="Shepherd Labs"/>
+					<Picker.Item label="Smith Hall" value="Smith Hall"/>
+					<Picker.Item label="Tate Hall" value="Tate Hall"/>
+					<Picker.Item label="Transportation and Safety Building" value="Transportation and Safety Building"/>
+					<Picker.Item label="UMN Medical Center" value="UMN Medical Center"/>
+					<Picker.Item label="University Avenue Ramp" value="University Avenue Ramp"/>
+					<Picker.Item label="Variety Club Resource Center" value="Variety Club Resource Center"/>
+					<Picker.Item label="Vincent Hall" value="Vincent Hall"/>
+					<Picker.Item label="Walter Library" value="Walter Library"/>
+					<Picker.Item label="Washington Avenue Parking Ramp" value="Washington Avenue Parking Ramp"/>
+					<Picker.Item label="Weaver-Densford Hall" value="Weaver-Densford Hall"/>
+					<Picker.Item label="Williamson Hall" value="Williamson Hall"/>
+					<Picker.Item label="Yudof Hall" value="Yudof Hall"/>
+				</Picker>
+
+				<Text style={styles.subHeading}> Ending Building </Text>
+				<Picker style={styles.dropdownLg}
+					startBuilding={this.state.PickerSelectedVal}
+					onValueChange={(itemValue, itemPosition) => this.setState({PickerSelectedVal: itemValue})}>
+					<Picker.Item label="10 Church St" value="10 Church St"/>
+					<Picker.Item label="Akerman Hall" value="Akerman Hall"/>
+					<Picker.Item label="Amundson Hall" value="Amundson Hall"/>
+					<Picker.Item label="Boynton Clinic" value="Boynton"/>
+					<Picker.Item label="Childrens Rehab" value="Childrens Rehab"/>
+					<Picker.Item label="The Civil Engineering Building" value="Civil Engineering"/>
+					<Picker.Item label="Coffman Union" value="Coffman"/>
+					<Picker.Item label="Diehl Hall" value="Diehl Hall"/>
+					<Picker.Item label="Dwan Cardio./Masonic Cancer Research Center" value="Dwan"/>
+					<Picker.Item label="East River Road Garage" value="East River Road Garage"/>
+					<Picker.Item label="Folwell Hall" value="Folwell Hall"/>
+					<Picker.Item label="Ford Hall" value="Ford Hall"/>
+					<Picker.Item label="The Graduate Hotel" value="The Graduate Hotel"/>
+					<Picker.Item label="Hospital Patient/Visitor Ramp" value="Hospital Patient/Visitor Ramp"/>
+					<Picker.Item label="Jackson Hall" value="Jackson Hall"/>
+					<Picker.Item label="Johnston Hall" value="Johnston Hall"/>
+					<Picker.Item label="Keller Hall" value="Keller Hall"/>
+					<Picker.Item label="Kolthoff Hall" value="Kolthoff Hall"/>
+					<Picker.Item label="Lind Hall" value="Lind Hall"/>
+					<Picker.Item label="Mayo Auditorium" value="Mayo Auditorium"/>
+					<Picker.Item label="Mayo Building" value="Mayo Building"/>
+					<Picker.Item label="MCB" value="MCB"/>
+					<Picker.Item label="McNamara Alumni Center" value="McNamara Alumni Center"/>
+					<Picker.Item label="Mechanical Engineering Building" value="Mechanical Engineering Building"/>
+					<Picker.Item label="Moos Tower" value="Moos Tower"/>
+					<Picker.Item label="Morrill Hall" value="Morrill Hall"/>
+					<Picker.Item label="Murphy Hall" value="Murphy Hall"/>
+					<Picker.Item label="Nils-Hasselmo Hall" value="Nils-Hasselmo Hall"/>
+					<Picker.Item label="Nolte Center" value="Nolte Center"/>
+					<Picker.Item label="Nolte Center Garage" value="Nolte Center Garage"/>
+					<Picker.Item label="Northrop Auditorium" value="Northrop Auditorium"/>
+					<Picker.Item label="Northrop Garage" value="Northrop Garage"/>
+					<Picker.Item label="P-W Building" value="P-W Building"/>
+					<Picker.Item label="Rapson Hall" value="Rapson Hall"/>
+					<Picker.Item label="Shepherd Labs" value="Shepherd Labs"/>
+					<Picker.Item label="Smith Hall" value="Smith Hall"/>
+					<Picker.Item label="Tate Hall" value="Tate Hall"/>
+					<Picker.Item label="Transportation and Safety Building" value="Transportation and Safety Building"/>
+					<Picker.Item label="UMN Medical Center" value="UMN Medical Center"/>
+					<Picker.Item label="University Avenue Ramp" value="University Avenue Ramp"/>
+					<Picker.Item label="Variety Club Resource Center" value="Variety Club Resource Center"/>
+					<Picker.Item label="Vincent Hall" value="Vincent Hall"/>
+					<Picker.Item label="Walter Library" value="Walter Library"/>
+					<Picker.Item label="Washington Avenue Parking Ramp" value="Washington Avenue Parking Ramp"/>
+					<Picker.Item label="Weaver-Densford Hall" value="Weaver-Densford Hall"/>
+					<Picker.Item label="Williamson Hall" value="Williamson Hall"/>
+					<Picker.Item label="Yudof Hall" value="Yudof Hall"/>
+				</Picker>
+
+				<Button title="Submit" style={styles.button} onPress={()=>this.routeSubmit(this.startBuilding,this.endBuilding)}/>
 			</View>
 		);
 	}
 }
-/*Eventually, I would want this component to be able to use previously 
-input information (which campus was chosen) before running this to
-display certian arrays of info in the dropdown */
-/*Also I would like to make it so the building 
-has to be chosen first, and based on that input
-the floor selection would change (access certain
-array values or run nAFloors under that dropdown)*/

@@ -1,9 +1,9 @@
 # stuff
-.expo/
-web-build/
-android/
-ios/
-node_modules/
+.expo/*
+web-build/*
+android/*
+ios/*
+node_modules/*
 
 # OSX
 #
