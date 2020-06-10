@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, ScrollView, StyleSheet} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {MapView, Polyline} from 'react-native-maps';
 import styles from '../style';
 
@@ -28,15 +28,13 @@ export default class GraphEdge extends Component
 		var filename='coffman_yudof.json';//file from ./directions if origin == routePts[0] && destination == routePts[1]
 		return fetch('https://sase-labs-2020.github.io/assets/directions/'+ filename)
 		.then(response => response.json())
-		.then
-			(responseJson => {
-				this.setState
-				({
+		.then(responseJson => {
+				this.setState({
 					isLoading: false,
 					data: responseJson,
 					coordArray: this.state.data.coordinates,
 				})
-			})
+		})
 		.catch(error => console.error(error));
 	}
 
@@ -44,16 +42,14 @@ export default class GraphEdge extends Component
 	{
 		if (this.state.isLoading)
 		{
-			return 
-			(
+			return(
 				<View style={{flex: 1, padding: 20}}>
 					<ActivityIndicator/>
 				</View>
 			);
 		}
 		
-		return 
-		(
+		return(
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
 				<Polyline coordinates={this.state.coordArray}/>
 			</MapView>
