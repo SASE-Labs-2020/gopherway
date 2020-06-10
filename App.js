@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, View} from 'react-native';
-import {MapView} from 'react-native-maps';
 import * as Font from 'expo-font';
 import Direction from './src/components/Direction';
 import styles from './src/style';

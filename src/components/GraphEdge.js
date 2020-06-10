@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {ActivityIndicator, View} from 'react-native';
-import {MapView, Polyline} from 'react-native-maps';
+import MapView from 'react-native-maps';
+import {Polyline} from 'react-native-maps';
 import styles from '../style';
 
-const LATITUDE = 44.98295;
+const LATITUDE = 44.974208;
 const LONGITUDE = -93.2325;
-const LATITUDE_DELTA = 0.00415;
-const LONGITUDE_DELTA = 0.0054;
+const LATITUDE_DELTA = 0.001;
+const LONGITUDE_DELTA = 0.012;
 
 export default class GraphEdge extends Component 
 {
@@ -32,7 +33,6 @@ export default class GraphEdge extends Component
 				this.setState({
 					isLoading: false,
 					data: responseJson,
-					coordArray: this.state.data.coordinates,
 				})
 		})
 		.catch(error => console.error(error));
@@ -51,7 +51,7 @@ export default class GraphEdge extends Component
 		
 		return(
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
-				<Polyline coordinates={this.state.coordArray}/>
+				<Polyline coordinates={this.state.data.coordinates}/>
 			</MapView>
 		);
 	}
