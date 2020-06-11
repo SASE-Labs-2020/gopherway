@@ -4,26 +4,26 @@ import {Picker} from '@react-native-community/picker';
 import styles from '../style';
 import colors from '../style';
 import { Dropdown } from 'react-native-material-dropdown';
+import GraphEdge from './GraphEdge';
 
 export default class RouteSelection extends Component 
 {
 	constructor(props) 
 	{
 		super(props);
-		this.state = {isLoading: false, scrollable: false, campusInput: "East Bank"};//Initial state
+		this.state = {isLoading: false, scrollable: false, campusInput: "East Bank", start: null, end: null};//Initial state
 	}//Called in App.js
-			
-	routeSubmit(start,end)
-	{
-		var routePts = []
-    	routePts[0] = start;
-		routePts[1] = end;
-		return routePts
+
+	openMap(){
+		return(
+			<View style={styles.container}>
+				<GraphEdge/>
+			</View>
+		);
 	}
 
 	render() 
 	{
-		
 		if (this.state.isLoading) 
 		{
 			return (
@@ -54,20 +54,31 @@ export default class RouteSelection extends Component
 		];
 
 		return (
-			<View>
+			<ScrollView>
 				<Text style={styles.heading}>Pick Your Route</Text>			
 				<Dropdown
         			label='Starting Building'
 					data={EBank}
+					onChangeText ={(value)=> this.setState({start: value})}
+					baseColor='#ffcc33'
+					textColor='#7a0019'
+					itemColor='#ffcc33'
+					selectedItemColor='#610014'
 			     />
 
 				<Dropdown
         			label='Ending Building'
-        			data={EBank}
+					data={EBank}
+					onChangeText ={(value)=> this.setState({end: value})}
+					baseColor='#ffcc33'
+					textColor='#7a0019'
+					itemColor='#ffcc33'
+					selectedItemColor='#610014'
 			     />
 
-				<Button title="Submit" style={styles.button} onPress={()=>this.routeSubmit(this.startBuilding,this.endBuilding)}/>
-			</View>
+				<Button title="Submit" style={styles.button} onPress={()=>console.log(this.state.start + ", " + this.state.end)}/>
+				<Button title="Map" style={styles.button} onPress={()=>openMap()}/>
+			</ScrollView>
 		);
 	}
 }
