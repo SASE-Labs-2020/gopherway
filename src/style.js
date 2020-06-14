@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		padding: 22,
 		color: colors.gold,
-		backgroundColor: colors.maroon
+		backgroundColor: colors.maroon,
 	},
 	subHeading:{
 		fontFamily: 'neutraface',

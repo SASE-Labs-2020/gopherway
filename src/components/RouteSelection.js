@@ -14,13 +14,6 @@ export default class RouteSelection extends Component
 		this.state = {isLoading: false, scrollable: false, campusInput: "East Bank", start: null, end: null};//Initial state
 	}//Called in App.js
 
-	openMap(){
-		return(
-			<View style={styles.container}>
-				<RouteAccessedMap/>
-			</View>
-		);
-	}
 
 	render() 
 	{
@@ -77,7 +70,6 @@ export default class RouteSelection extends Component
 			     />
 
 				<Button title="Submit" style={styles.button} onPress={()=>console.log(this.state.start + ", " + this.state.end)}/>
-				<Button title="Map" style={styles.button} onPress={()=>openMap()}/>
 			</ScrollView>
 		);
 	}
