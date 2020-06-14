@@ -4,7 +4,7 @@ import {Picker} from '@react-native-community/picker';
 import styles from '../style';
 import colors from '../style';
 import { Dropdown } from 'react-native-material-dropdown';
-import GraphEdge from './GraphEdge';
+import RouteAccessedMap from './RouteAccessedMap';
 
 export default class RouteSelection extends Component 
 {
@@ -17,7 +17,7 @@ export default class RouteSelection extends Component
 	openMap(){
 		return(
 			<View style={styles.container}>
-				<GraphEdge/>
+				<RouteAccessedMap/>
 			</View>
 		);
 	}

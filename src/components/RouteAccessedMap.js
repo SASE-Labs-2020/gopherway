@@ -9,7 +9,7 @@ const LONGITUDE = -93.2325;
 const LATITUDE_DELTA = 0.001;
 const LONGITUDE_DELTA = 0.012;
 
-export default class RouteAccessMap extends Component 
+export default class RouteAccessedMap extends Component 
 {
 	constructor(routePts) 
 	{
@@ -24,18 +24,16 @@ export default class RouteAccessMap extends Component
 		};
 	}
 
-	componentDidMount()
-	{
-		var filename='coffman_yudof.json';//file from ./directions if origin == routePts[0] && destination == routePts[1]
-		return fetch('https://sase-labs-2020.github.io/assets/directions/'+ filename)
-		.then(response => response.json())
-		.then(responseJson => {
+	componentDidMount() {
+		return fetch(this.props.uri)
+			.then(response => response.json())
+			.then(responseJson => {
 				this.setState({
 					isLoading: false,
 					data: responseJson,
 				})
-		})
-		.catch(error => console.error(error));
+			})
+			.catch(error => console.error(error));
 	}
 
 	render()
