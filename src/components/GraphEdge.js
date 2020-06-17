@@ -24,11 +24,12 @@ export default class GraphEdge extends Component
 		};
 	}
 
-	componentDidMount()
+	async componentDidMount()
 	{
+		var jsonArray = [];
 		var filenames= this.props.filenames;
-		var urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename);
-		var responseJson = urls.map(url => fetch(url).then(response => response.json()));
+		var urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
+		urls.forEach(url => {fetch(url).then(response => jsonArray.push(response.json()))});
 		this.setState({
 			isLoading: false,
 			data: responseJson,

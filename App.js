@@ -34,10 +34,9 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<GraphEdge/>
+				<GraphEdge filenames = {['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']}/>
 			</View>
 		);
 	}
-}//<RouteSelection/>
-//<GraphEdge routePts = {RouteSelection.routePts}/>
+}
 
