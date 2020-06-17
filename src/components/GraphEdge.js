@@ -11,11 +11,11 @@ const LONGITUDE_DELTA = 0.012;
 
 export default class GraphEdge extends Component 
 {
-	constructor(routePts) 
+	constructor(props) 
 	{
-		super(routePts);
+		super(props);
 		this.state = 
-		{ isLoading: true, scrollable: false, coordArray: [],
+		{ isLoading: true, scrollable: false,
 			Region: {latitude: LATITUDE,
 			longitude: LONGITUDE,
 			latitudeDelta: LATITUDE_DELTA,
@@ -26,16 +26,13 @@ export default class GraphEdge extends Component
 
 	componentDidMount()
 	{
-		var filename='coffman_yudof.json';//file from ./directions if origin == routePts[0] && destination == routePts[1]
-		return fetch('https://sase-labs-2020.github.io/assets/directions/'+ filename)
-		.then(response => response.json())
-		.then(responseJson => {
-				this.setState({
-					isLoading: false,
-					data: responseJson,
-				})
-		})
-		.catch(error => console.error(error));
+		var filenames= this.props.filenames;
+		var urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename);
+		var responseJson = urls.map(url => fetch(url).then(response => response.json()));
+		this.setState({
+			isLoading: false,
+			data: responseJson,
+		});
 	}
 
 	render()
@@ -51,7 +48,7 @@ export default class GraphEdge extends Component
 		
 		return(
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
-				<Polyline coordinates={this.state.data.coordinates}/>
+				{this.state.data.map(json => <Polyline coordinates={json.coordinates}/>)}
 			</MapView>
 		);
 	}
