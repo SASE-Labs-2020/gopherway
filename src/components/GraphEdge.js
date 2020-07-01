@@ -15,7 +15,7 @@ export default class GraphEdge extends Component
 	{
 		super(props);
 		this.state = 
-		{ isLoading: true, scrollable: false,
+		{ isLoading: false, scrollable: false, data: [],
 			Region: {latitude: LATITUDE,
 			longitude: LONGITUDE,
 			latitudeDelta: LATITUDE_DELTA,
@@ -24,16 +24,33 @@ export default class GraphEdge extends Component
 		};
 	}
 
-	async componentDidMount()
-	{
+	async componentDidMount(){
 		var jsonArray = [];
 		var filenames= this.props.filenames;
 		var urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
-		urls.forEach(url => {fetch(url).then(response => jsonArray.push(response.json()))});
-		this.setState({
-			isLoading: false,
-			data: responseJson,
-		});
+		urls = urls.forEach(url =>
+			{return fetch
+				(url,
+					{
+						method: "GET",
+						headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						},
+					}
+				).then(response => response.json())
+        			.then((responseData) => {
+						console.log(responseData)
+          				this.setState(
+							(prevState) => {
+								return {
+									data: prevState.data.concat(responseData),
+									isLoading: false,
+								};
+							}
+          				);
+					});
+    		});
 	}
 
 	render()
