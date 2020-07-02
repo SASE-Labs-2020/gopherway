@@ -6,7 +6,6 @@ import styles from './src/style';
 import RouteSelection from './src/components/RouteSelection';
 import GraphEdge from './src/components/GraphEdge';
 
-const url = 'https://sase-labs-2020.github.io/assets/directions/graduate_mcNamara.json';
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -35,10 +34,9 @@ export default class App extends Component {
 
 		return (
 			<View style={styles.container}>
-				<GraphEdge/>
+				<GraphEdge filenames = {['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']}/>
 			</View>
 		);
 	}
-}//<RouteSelection/>
-//<GraphEdge routePts = {RouteSelection.routePts}/>
+}
 

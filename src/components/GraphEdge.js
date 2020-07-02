@@ -11,11 +11,11 @@ const LONGITUDE_DELTA = 0.012;
 
 export default class GraphEdge extends Component 
 {
-	constructor(routePts) 
+	constructor(props) 
 	{
-		super(routePts);
+		super(props);
 		this.state = 
-		{ isLoading: true, scrollable: false, coordArray: [],
+		{ isLoading: false, scrollable: false, data: [],
 			Region: {latitude: LATITUDE,
 			longitude: LONGITUDE,
 			latitudeDelta: LATITUDE_DELTA,
@@ -24,18 +24,33 @@ export default class GraphEdge extends Component
 		};
 	}
 
-	componentDidMount()
-	{
-		var filename='coffman_yudof.json';//file from ./directions if origin == routePts[0] && destination == routePts[1]
-		return fetch('https://sase-labs-2020.github.io/assets/directions/'+ filename)
-		.then(response => response.json())
-		.then(responseJson => {
-				this.setState({
-					isLoading: false,
-					data: responseJson,
-				})
-		})
-		.catch(error => console.error(error));
+	async componentDidMount(){
+		var jsonArray = [];
+		var filenames= this.props.filenames;
+		var urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
+		urls = urls.forEach(url =>
+			{return fetch
+				(url,
+					{
+						method: "GET",
+						headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						},
+					}
+				).then(response => response.json())
+        			.then((responseData) => {
+						console.log(responseData)
+          				this.setState(
+							(prevState) => {
+								return {
+									data: prevState.data.concat(responseData),
+									isLoading: false,
+								};
+							}
+          				);
+					});
+    		});
 	}
 
 	render()
@@ -51,7 +66,7 @@ export default class GraphEdge extends Component
 		
 		return(
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
-				<Polyline coordinates={this.state.data.coordinates}/>
+				{this.state.data.map(json => <Polyline coordinates={json.coordinates}/>)}
 			</MapView>
 		);
 	}
