@@ -7,7 +7,6 @@ import RouteSelection from './src/components/RouteSelection';
 
 const url = 'https://sase-labs-2020.github.io/assets/directions/coffman_yudof.json'
 import MapView, {Marker} from 'react-native-maps';
-import {PROVIDER_GOOGLE} from 'react-native-maps';
 
 export default class BuildingMarker extends Component {
 render() {
@@ -15,7 +14,6 @@ render() {
     <MapView
       style={{ flex: 1 }}
       showsUserLocation
-      provider={PROVIDER_GOOGLE}
       initialRegion={{
           latitude: 44.9727,
           longitude: -93.2354,
