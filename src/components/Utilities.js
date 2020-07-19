@@ -1,11 +1,12 @@
 // Utilities
-const AsyncStorage = require('@react-native-community/async-storage');
-const fetch = require('node-fetch');
 
-class Utilities {
+import AsyncStorage from '@react-native-community/async-storage';
+
+export default class Utilities {
 
     constructor() {
-        
+        super(null);
+
         this.get = function(key) { //returns string
             try {
                 const value = AsyncStorage.getItem(key);
@@ -28,21 +29,18 @@ class Utilities {
     }
 
 
-    pullGraph() 
-    {   
+    pullGraph() {
         const stored = this.get('graph');
-        
+
         fetch('https://github.com/SASE-Labs-2020/SASE-Labs-2020.github.io/blob/master/assets/graph.json')
             .then(graph => graph.json())
-            .then(graphJson => {
-                graphJson = JSON.stringify(graph.JSON);
-                if (stored !== graphJson) {
-                    this.store('graph', graphJson);
+            .then(data => {
+                data = JSON.stringify(data);
+                if (stored !== data) {
+                    this.store('graph', data);
                 }
-                return true;
             })
-            .catch(error => console.log(error));  
-        return false;
+            .catch(error => console.log(error));
     }
 
     getGraph() 
@@ -53,7 +51,7 @@ class Utilities {
 
     getPath()
     {
-        const Graph = require('node-dijkstra')
+        const Graph = require('node-dijkstra');
         const route = new Graph(this.getGraph());
        
         let path = route.path(
@@ -68,8 +66,24 @@ class Utilities {
         this.store('start', start);
         this.store('end', end);
     }
+
+    getFile(start, end)
+    {
+        fetch('https://github.com/SASE-Labs-2020/SASE-Labs-2020.github.io/blob/master/assets/names.json')
+            .then(names => names.json())
+            .then(data => {
+                file = data[start] + "_" + data[end];
+                fetch('https://github.com/SASE-Labs-2020/SASE-Labs-2020.github.io/blob/master/assets/directions/'+ file + '.json')
+                    .then(file1 => file1.json())
+                    .then(data1 => {
+                        return data1;
+                    })
+                    .catch(error => console.log(error)); 
+            })
+            .catch(error => console.log(error));  
+    }
     
 }
 
-module.exports = Utilities;
+
 
