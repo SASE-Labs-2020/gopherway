@@ -1,45 +1,3 @@
-/*import React, { Component } from 'react';
-import { ActivityIndicator, View} from 'react-native';
-import * as Font from 'expo-font';
-import Direction from './src/components/Direction';
-import styles from './src/style';
-import RouteSelection from './src/components/RouteSelection';
-import GraphEdge from './src/components/GraphEdge';
-
-export default class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			loaded: false,
-		};
-	}
-
-	async componentDidMount() {
-		await Font.loadAsync({
-			'neutraface': require('./assets/fonts/NeutraText-Bold.otf'),
-			'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
-		});
-		this.setState({loaded: true});
-	}
-
-	render() {
-		if (!this.state.loaded) {
-			return (
-				<View>
-					<ActivityIndicator/>
-				</View>
-			);
-		}
-
-
-		return (
-			<View style={styles.container}>
-				<GraphEdge filenames = {['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']}/>
-			</View>
-		);
-	}
-}*/
-
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -53,7 +11,7 @@ import GraphEdge from './src/components/GraphEdge';
 
 function StartScreen() {
     return (
-        <View>
+        <View style={styles.container}>
             <StartMenu/>
         </View>
     );
@@ -61,16 +19,16 @@ function StartScreen() {
 
 function RouteScreen() {
     return (
-        <View>
-            <RouteSelection/>
-        </View>
+        <View style={styles.container}>
+				<RouteSelection/>
+		</View>
     );
 }
 
 function DirectionScreen() {
     return (
-        <View>
-            <Direction/>
+        <View style={styles.container}>
+            <Direction buildings={['tNs', 'graduate', 'mcNamara', 'universityAveRamp']}/>
         </View>
     );
 }

@@ -1,38 +1,45 @@
+// Currently redundant. Functional code for navbar is in App.js
+
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from './src/style';
+import StartMenu from './src/components/StartMenu';
+import Direction from './src/components/Direction';
+import RouteSelection from './src/components/RouteSelection';
+import GraphEdge from './src/components/GraphEdge';
 
 function StartScreen() {
     return (
-        <View>
-            <Text>Start</Text>
+        <View style={styles.container}>
+            <StartMenu/>
         </View>
     );
 }
 
 function RouteScreen() {
     return (
-        <View>
-            <Text>Route</Text>
-        </View>
+        <View style={styles.container}>
+				<RouteSelection/>
+		</View>
     );
 }
 
 function DirectionScreen() {
     return (
-        <View>
-            <Text>Direction</Text>
+        <View style={styles.container}>
+            <Direction buildings={['tNs', 'graduate', 'mcNamara', 'universityAveRamp']}/>
         </View>
     );
 }
 
 function GraphScreen() {
     return (
-        <View>
-            <Text>Graph</Text>
-        </View>
+        <View style={styles.container}>
+				<GraphEdge filenames = {['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']}/>
+		</View>
     );
 }
 
@@ -43,7 +50,7 @@ export default function NavigationBar() {
         <NavigationContainer>
             <Tab.Navigator
                 initialRouteName="Start"
-                activeColor="#0693e3"
+                activeColor="white"
                 style={{ backgroundColor: 'blue' }}
             >
                 <Tab.Screen
@@ -93,3 +100,4 @@ export default function NavigationBar() {
         </NavigationContainer>
     );
 }
+
