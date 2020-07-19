@@ -1,8 +1,8 @@
 // Utilities
-
+import React from 'React';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export default class Utilities {
+export default class Utilities extends React.Component {
 
     constructor() {
         super(null);
