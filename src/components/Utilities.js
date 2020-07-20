@@ -29,10 +29,10 @@ export default class Utilities extends React.Component {
     }
 
 
-    pullGraph() {
+    async pullGraph() {
         const stored = this.get('graph');
 
-        fetch('https://github.com/SASE-Labs-2020/SASE-Labs-2020.github.io/blob/master/assets/graph.json')
+        fetch('https://SASE-Labs-2020.github.io/assets/graph.json')
             .then(graph => graph.json())
             .then(data => {
                 data = JSON.stringify(data);
@@ -67,20 +67,19 @@ export default class Utilities extends React.Component {
         this.store('end', end);
     }
 
-    getFile(start, end)
+    async getFile(start, end)
     {
-        fetch('https://github.com/SASE-Labs-2020/SASE-Labs-2020.github.io/blob/master/assets/names.json')
+        const names = await fetch('https://SASE-Labs-2020.github.io/assets/names.json')
             .then(names => names.json())
-            .then(data => {
-                file = data[start] + "_" + data[end];
-                fetch('https://github.com/SASE-Labs-2020/SASE-Labs-2020.github.io/blob/master/assets/directions/'+ file + '.json')
-                    .then(file1 => file1.json())
-                    .then(data1 => {
-                        return data1;
-                    })
-                    .catch(error => console.log(error)); 
-            })
             .catch(error => console.log(error));  
+
+        var file = names[start] + "_" + names[end];
+        fetch('https://SASE-Labs-2020.github.io/assets/directions/' + file + '.json')
+            .then(file1 => file1.json())
+            .then(data => {
+                return data;
+            })
+            .catch(error => console.log(error)); 
     }
     
 }
