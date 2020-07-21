@@ -24,33 +24,58 @@ export default class GraphEdge extends Component
 		};
 	}
 
+  async getData(url) {
+    const response = await fetch(url);
+    return response.json()
+  }
+
 	async componentDidMount(){
-		var jsonArray = [];
-		var filenames= this.props.filenames;
-		var urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
-		urls = urls.forEach(url =>
-			{return fetch
-				(url,
-					{
-						method: "GET",
-						headers: {
+    var urls;
+		if(this.props.filenames==null){
+			const graph = await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json');
+			const names = await this.getData('https://SASE-Labs-2020.github.io/assets/names.json');
+      //console.log(JSON.stringify(graph) + JSON.stringify(names));
+	  const first = Object.entries(graph).map(([start, ends]) => {
+        const n_ends = Object.keys(ends).length;
+					return [Array(n_ends).fill(start), Object.keys(ends)];
+			});
+			const zip= rows=>rows[0].map((_,index)=>rows.map(row=>row[index]));
+			const second = first.map(([starts, ends]) => zip([starts, ends]));
+      console.log(second);
+			const third = second.map(
+        (paths) => paths.map(
+          (path) => {
+            const new_path = [names[path[0]], names[path[1]]];
+            return 'https://sase-labs-2020.github.io/assets/directions/' + new_path.join('_') + '.json';
+          }
+        )
+      );
+			urls = [].concat.apply([], third);
+			
+		} else{
+			var filenames= this.props.filenames;
+			urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
+		}
+			urls = urls.forEach(url =>{return fetch(url, {
+					method: "GET",
+					headers: {
 						'Accept': 'application/json',
 						'Content-Type': 'application/json',
-						},
-					}
-				).then(response => response.json())
-        			.then((responseData) => {
+					},
+				})
+				.then(response => response.json())
+					.then((responseData) => {
 						console.log(responseData)
-          				this.setState(
+						this.setState(
 							(prevState) => {
 								return {
 									data: prevState.data.concat(responseData),
 									isLoading: false,
 								};
 							}
-          				);
+						);
 					});
-    		});
+			});
 	}
 
 	render()
