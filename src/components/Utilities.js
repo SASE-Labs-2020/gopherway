@@ -1,8 +1,8 @@
 // Utilities
-import React from 'React';
+import React, { Component } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export default class Utilities extends React.Component {
+export default class Utilities extends Component {
 
     constructor() {
         super(null);
@@ -16,7 +16,6 @@ export default class Utilities extends React.Component {
             }
         }
 
-
         this.store = function(key, value) { //takes in string
             try {
                 AsyncStorage.setItem(key, value);
@@ -28,19 +27,21 @@ export default class Utilities extends React.Component {
         this.store('graph', null);
     }
 
+    render() { }
+
+    async getData(url) {
+        const response = await fetch(url);
+        return response.json();
+    }
 
     async pullGraph() {
         const stored = this.get('graph');
+        const data = await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json');
 
-        fetch('https://SASE-Labs-2020.github.io/assets/graph.json')
-            .then(graph => graph.json())
-            .then(data => {
-                data = JSON.stringify(data);
-                if (stored !== data) {
-                    this.store('graph', data);
-                }
-            })
-            .catch(error => console.log(error));
+        data = JSON.stringify(data);
+        if (stored !== data) {
+            this.store('graph', data);
+        }           
     }
 
     getGraph() 
@@ -69,17 +70,12 @@ export default class Utilities extends React.Component {
 
     async getFile(start, end)
     {
-        const names = await fetch('https://SASE-Labs-2020.github.io/assets/names.json')
-            .then(names => names.json())
-            .catch(error => console.log(error));  
-
+        const names = await this.getData('https://SASE-Labs-2020.github.io/assets/names.json');
+         
         var file = names[start] + "_" + names[end];
-        fetch('https://SASE-Labs-2020.github.io/assets/directions/' + file + '.json')
-            .then(file1 => file1.json())
-            .then(data => {
-                return data;
-            })
-            .catch(error => console.log(error)); 
+
+        const data = await this.getData('https://SASE-Labs-2020.github.io/assets/directions/' + file + '.json');
+        return data;     
     }
     
 }
