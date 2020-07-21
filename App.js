@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+=======
+import React, { Component } from 'react';
+import { ActivityIndicator, View} from 'react-native';
+import Direction from './src/components/Direction';
+>>>>>>> origin
 import styles from './src/style';
 import StartMenu from './src/components/StartMenu';
 import Direction from './src/components/Direction';
 import RouteSelection from './src/components/RouteSelection';
 import GraphEdge from './src/components/GraphEdge';
 
+<<<<<<< HEAD
 function StartScreen() {
     return (
         <View style={styles.container}>
@@ -97,5 +104,20 @@ export default function App() {
             </Tab.Navigator>
         </NavigationContainer>
     );
+=======
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<View style={styles.container}>
+        <Direction buildings={['tNs', 'graduate', 'mcNamara', 'universityAveRamp']}/>
+      </View>
+		);
+	}
+>>>>>>> origin
 }
+
 
