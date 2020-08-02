@@ -6,7 +6,7 @@ import colors from '../style';
 
 const eastBankList =
 [
-	{value: '10 Churchl',},
+	{value: '10 Church',},
 	{value: 'Akerman Hall',},
 	{value: 'Amundson Hall',},
 	{value: 'Boynton Clinic',},
