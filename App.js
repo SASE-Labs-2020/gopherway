@@ -9,6 +9,100 @@ const url = 'https://sase-labs-2020.github.io/assets/directions/coffman_yudof.js
 import MapView, {Marker} from 'react-native-maps';
 
 export default class BuildingMarker extends Component {
+  
+  constructor(props){
+          super(props);
+          this.state = {isLoading: true, scrollable: false , data:[]};
+     }
+  
+     componentDidMount(){
+         var paths = this.props.filenames.reduce(
+  ["10Church",
+     "amundson",
+     "universityAveRamp",
+     "eastRiverGarage",
+     "ford",
+     "admundson",
+     "akerman",
+     "diehl",
+     "boynton",
+     "dVC",
+     "civilE",
+     "childrenRehabClinic",
+     "hsec",
+     "keller",
+     "lind",
+     "mayoBuilding",
+     "mcb",
+     "moosTower",
+     "nilsHasselmo",
+     "nolteCtr",
+     "northrop",
+     "phillipsWangensteen",
+     "rapson",
+     "shepherdLab",
+     "tate",
+     "vincent",
+     "hospitalRamp",
+     "washingtonAveRamp",
+     "weaverDensford",
+     "akerman",
+     "coffman",
+     "folwell",
+     "graduate",
+     "hasselmo",
+     "jackson",
+     "jones",
+     "keller",
+     "kolthoff",
+     "lind",
+     "mCC",
+     "mcNamara",
+     "mechE",
+     "smith",
+     "nolteCtrGarage",
+     "10Church",
+     "folwell",
+     "morill",
+     "murphy",
+     "nolteCtr",
+     "northropGarage",
+     "tate",
+     "tNs",
+     "universityAveRamp",
+     "varClub",
+     "walter",
+     "washingtonAveRamp",
+     "williamson",
+     "yudof",
+     "johnston",
+     "mayoBldg"]);
+          var urls = paths.map(path => "https://sase-labs-2020.github.io/assets/informations/" + path.join("_") + ".json");
+          urls = urls.forEach(url =>
+               {return fetch(url,
+                         {
+                              method: "GET",
+                              headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json',
+                              },
+                         }
+                    ).then(response => response.json())
+                    .then((responseData) => {
+                         console.log(responseData);
+                              this.setState(
+                                   (prevState) => {
+                                        return {
+                                             data: prevState.data.concat(responseData),
+                                             isLoading: false,
+                                        };
+                                   }
+                              );
+                         });
+          });
+     }
+  
+  
 render() {
   return (
     <MapView
