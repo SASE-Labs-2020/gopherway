@@ -9,34 +9,81 @@ export default class Direction extends Component {
 	}
 
 	componentDidMount() {
-		var paths = this.props.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
-		var urls = paths.map(path => "https://sase-labs-2020.github.io/assets/directions/" + path.join("_") + ".json");
-    console.log(urls);
-		urls = urls.forEach(url =>
-			{return fetch(url,
-					{
-						method: "GET",
-						headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-						},
-					}
-				).then(response => response.json())
-        			.then((responseData) => {
-					console.log(responseData);
-          				this.setState(
-							(prevState) => {
-								return {
-									data: prevState.data.concat(responseData),
-									isLoading: false,
-								};
-							}
-          				);
-					});
-    		});
+		if(this.props.buildings==null){
+			this.setState(
+				(prevState) => {
+					return {
+						isLoading: false,
+					};
+				}
+			);
+		}else{
+			var paths = this.props.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
+			var urls = paths.map(path => "https://sase-labs-2020.github.io/assets/directions/" + path.join("_") + ".json");
+			console.log(urls);
+			urls = urls.forEach(url =>
+				{return fetch(url,
+						{
+							method: "GET",
+							headers: {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json',
+							},
+						}
+					).then(response => response.json())
+						.then((responseData) => {
+						console.log(responseData);
+							this.setState(
+								(prevState) => {
+									return {
+										data: prevState.data.concat(responseData),
+										isLoading: false,
+									};
+								}
+							);
+						});
+				});
+		}
+	}
+
+	componentDidUpdate(){
+		if(this.props.buildings!=null){
+			var paths = this.props.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
+			var urls = paths.map(path => "https://sase-labs-2020.github.io/assets/directions/" + path.join("_") + ".json");
+			console.log(urls);
+			urls = urls.forEach(url =>
+				{return fetch(url,
+						{
+							method: "GET",
+							headers: {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json',
+							},
+						}
+					).then(response => response.json())
+						.then((responseData) => {
+						console.log(responseData);
+							this.setState(
+								(prevState) => {
+									return {
+										data: prevState.data.concat(responseData),
+										isLoading: false,
+									};
+								}
+							);
+						});
+				});
+		}
 	}
 
 	render() {
+		if (this.props.buildings==null){
+			return (
+				<Text>
+					No route currently selected.
+				</Text>
+			)
+		}
 		if (this.state.isLoading) {
 			return (
 				<View style={{flex: 1, padding: 20}}>

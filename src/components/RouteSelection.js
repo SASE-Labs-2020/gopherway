@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {ActivityIndicator, FlatList, Image, ScrollView, Text, View, Button} from 'react-native';
 import styles from '../style';
 import { Dropdown } from 'react-native-material-dropdown';
+import Utilities from './Utilities.js';
+import { Navigation } from 'react-native-navigation';
 
 export default class RouteSelection extends Component 
 {
@@ -66,7 +68,20 @@ export default class RouteSelection extends Component
 					selectedItemColor='#610014'
 			     />
 
-				<Button title="Submit" style={styles.button} onPress={()=>console.log(this.state.start + ", " + this.state.end)}/>
+				<Button
+					title="Submit"
+					style={styles.button}
+					onPress={ ()=>{
+						const names = fetch('api/assets/names.json')
+						var startKey = names[this.state.start];
+						var endKey = names[this.state.end];
+						Utilities.setEndpoints(startKey, endKey);
+						var path = Utilities.getPath();
+						var graph = Utilities.getGraph();
+						Navigation.updateProps('DIRECTION', {buildings: path});
+						Navigation.updateProps('GRAPH_EDGE', {filenames: graph})
+					}}
+				/>
 			</ScrollView>
 		);
 	}
