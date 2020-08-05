@@ -44,30 +44,30 @@ export default class RouteSelection extends Component
 		];
 
 		return (
-			<ScrollView>
+			<SafeAreaView>
 				<Text style={styles.heading}>Pick Your Route</Text>			
 				<Dropdown
-        			label='Starting Building'
+						label='Starting Building'
 					data={EBank}
 					onChangeText ={(value)=> this.setState({start: value})}
-					baseColor='#ffcc33'
-					textColor='#7a0019'
-					itemColor='#ffcc33'
-					selectedItemColor='#610014'
-			     />
+					baseColor='#7DC242'
+					textColor='#0668B3'
+					itemColor='#0668B3'
+					selectedItemColor='#7DC242'
+					/>
 
 				<Dropdown
-        			label='Ending Building'
+						label='Ending Building'
 					data={EBank}
 					onChangeText ={(value)=> this.setState({end: value})}
-					baseColor='#ffcc33'
-					textColor='#7a0019'
-					itemColor='#ffcc33'
-					selectedItemColor='#610014'
-			     />
+					baseColor='#7DC242'
+					textColor='#0668B3'
+					itemColor='#0668B3'
+					selectedItemColor='#7DC242'
+					/>
 
 				<Button title="Submit" style={styles.button} onPress={()=>console.log(this.state.start + ", " + this.state.end)}/>
-			</ScrollView>
+      		</SafeAreaView>
 		);
 	}
 }
