@@ -8,13 +8,27 @@ import RouteSelection from './src/components/RouteSelection';
 const url = 'https://sase-labs-2020.github.io/assets/directions/coffman_yudof.json'
 import MapView, {Marker} from 'react-native-maps';
 
+const LATITUDE =44.9727;
+const LONGITUDE = -93.2354;
+const LATITUDE_DELTA = 0.015;
+const LONGITUDE_DELTA= 0.0121;
+
 export default class BuildingMarker extends Component {
   
-  constructor(props){
-          super(props);
-          this.state = {isLoading: true, scrollable: false , data:[]};
-     }
-     
+  constructor(props) 
+	{
+		super(props);
+		this.state = 
+		{ isLoading: false, scrollable: false, data: [],
+			Region: {latitude: LATITUDE,
+			longitude: LONGITUDE,
+			latitudeDelta: LATITUDE_DELTA,
+			longitudeDelta: LONGITUDE_DELTA,
+			}
+		};
+	}
+	
+	
      async getData(url) {
     const response = await fetch(url);
     return response.json()
@@ -23,29 +37,12 @@ export default class BuildingMarker extends Component {
 	async componentDidMount(){
     var urls;
 		if(this.props.filenames==null){
-			const graph = await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json');
 			const names = await this.getData('https://SASE-Labs-2020.github.io/assets/names.json');
-      //console.log(JSON.stringify(graph) + JSON.stringify(names));
-	  const first = Object.entries(graph).map(([start, ends]) => {
-        const n_ends = Object.keys(ends).length;
-					return [Array(n_ends).fill(start), Object.keys(ends)];
-			});
-			const zip= rows=>rows[0].map((_,index)=>rows.map(row=>row[index]));
-			const second = first.map(([starts, ends]) => zip([starts, ends]));
-      console.log(second);
-			const third = second.map(
-        (paths) => paths.map(
-          (path) => {
-            const new_path = [names[path[0]], names[path[1]]];
-            return 'https://sase-labs-2020.github.io/assets/directions/' + new_path.join('_') + '.json';
-          }
-        )
-      );
-			urls = [].concat.apply([], third);
+			urls = names.map(name => 'https://sase-labs-2020.github.io/assets/informations/'+ name + '.json')
 			
 		} else{
 			var filenames= this.props.filenames;
-			urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
+			urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/informations/'+ filename + '.json');
 		}
 			urls = urls.forEach(url =>{return fetch(url, {
 					method: "GET",
@@ -82,7 +79,13 @@ export default class BuildingMarker extends Component {
 		
 		return(
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
-				{this.state.data.map(json => <Polyline coordinates={json.coordinates}/>)}
+			
+			{this.state.data.map(json => <Marker
+			//coordinates={json.coordinates}
+			title={json.building}
+			description={json.info}
+			/>)}
+			
 			</MapView>
 		);
 	}
