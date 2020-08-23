@@ -5,7 +5,6 @@ import Direction from './src/components/Direction';
 import styles from './src/style';
 import RouteSelection from './src/components/RouteSelection';
 
-const url = 'https://sase-labs-2020.github.io/assets/directions/coffman_yudof.json'
 import MapView, {Marker} from 'react-native-maps';
 
 const LATITUDE =44.9727;
@@ -38,7 +37,7 @@ export default class BuildingMarker extends Component {
     var urls;
 		if(this.props.filenames==null){
 			const names = await this.getData('https://SASE-Labs-2020.github.io/assets/names.json');
-			urls = names.map(name => 'https://sase-labs-2020.github.io/assets/informations/'+ name + '.json')
+			urls = names.map(name => 'https://sase-labs-2020.github.io/assets/informations/'+ Object.values(name) + '.json')
 			
 		} else{
 			var filenames= this.props.filenames;
@@ -81,7 +80,7 @@ export default class BuildingMarker extends Component {
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
 			
 			{this.state.data.map(json => <Marker
-			//coordinates={json.coordinates}
+			coordinates={json.location}
 			title={json.building}
 			description={json.info}
 			/>)}
