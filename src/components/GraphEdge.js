@@ -15,7 +15,7 @@ export default class GraphEdge extends Component
 	{
 		super(props);
 		this.state = 
-		{ isLoading: false, scrollable: false, data: [],
+		{ isLoading: false, scrollable: false, data: [], filenames: [],
 			Region: {latitude: LATITUDE,
 			longitude: LONGITUDE,
 			latitudeDelta: LATITUDE_DELTA,
@@ -56,8 +56,8 @@ export default class GraphEdge extends Component
 			
 		}
 		else{
-			var filenames= this.props.route.params.filenames;
-			urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
+			this.setState({filenames: this.props.route.params.filenames});
+			urls = this.props.route.params.filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
 		}
 			urls = urls.forEach(url =>{return fetch(url, {
 					method: "GET",
@@ -82,10 +82,10 @@ export default class GraphEdge extends Component
 	}
 
 	async componentDidUpdate(){
-		var urls;
-		if(this.props.route.params.filenames!=null){
-			var filenames= this.props.route.params.filenames;
-			urls = filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
+		if(this.props.route.params.filenames!=null && JSON.stringify(this.state.filenames)!=JSON.stringify(this.props.route.params.filenames)){
+			var urls;
+			this.setState({filenames: this.props.route.params.filenames, data: []});
+			urls = this.props.route.params.filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
 			urls = urls.forEach(url =>{return fetch(url, {
 					method: "GET",
 					headers: {
@@ -100,7 +100,6 @@ export default class GraphEdge extends Component
 							(prevState) => {
 								return {
 									data: prevState.data.concat(responseData),
-									isLoading: false,
 								};
 							}
 						);

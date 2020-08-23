@@ -5,11 +5,11 @@ import styles from '../style';
 export default class Direction extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { isLoading: true, scrollable: false, data: [] };
+		this.state = { isLoading: true, scrollable: false, data: [], buildings: [] };
 	}
 
 	componentDidMount() {
-		if(this.props.buildings==null){
+		if(this.props.route.params.buildings==null){
 			this.setState(
 				(prevState) => {
 					return {
@@ -18,7 +18,8 @@ export default class Direction extends Component {
 				}
 			);
 		}else{
-			var paths = this.props.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
+			this.setState({buildings: this.props.route.params.buildings});
+			var paths = this.props.route.params.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
 			var urls = paths.map(path => "https://sase-labs-2020.github.io/assets/directions/" + path.join("_") + ".json");
 			console.log(urls);
 			urls = urls.forEach(url =>
@@ -47,8 +48,9 @@ export default class Direction extends Component {
 	}
 
 	componentDidUpdate(){
-		if(this.props.buildings!=null){
-			var paths = this.props.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
+		if(this.props.route.params.buildings!=null && JSON.stringify(this.state.buildings)!=JSON.stringify(this.props.route.params.buildings)){
+			this.setState({buildings: this.props.route.params.buildings});
+			var paths = this.props.route.params.buildings.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[cur, src[idx+1]]]) : acc, []);
 			var urls = paths.map(path => "https://sase-labs-2020.github.io/assets/directions/" + path.join("_") + ".json");
 			console.log(urls);
 			urls = urls.forEach(url =>
@@ -77,7 +79,7 @@ export default class Direction extends Component {
 	}
 
 	render() {
-		if (this.props.buildings==null){
+		if (this.props.route.params.buildings==null){
 			return (
 				<Text>
 					No route currently selected.
