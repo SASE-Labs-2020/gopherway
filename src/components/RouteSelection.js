@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
-import {ActivityIndicator, FlatList, Image, ScrollView, Text, View, Button} from 'react-native';
+import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from 'react-native';
 import styles from '../style';
 import { Dropdown } from 'react-native-material-dropdown';
+import { Title, Button } from 'react-native-paper';
 
 export default class RouteSelection extends Component 
 {
 	constructor(props) 
 	{
 		super(props);
-		this.state = {isLoading: false, scrollable: false, campusInput: "East Bank", start: null, end: null};//Initial state
+		this.state = {isLoading: false, scrollable: false, campusInput: "East Bank", start: null, end: null, EBank: [], dictionary: {}};//Initial state
+
 	}//Called in App.js
 
+	async getData(url) {
+        const response = await fetch(url);
+        return response.json();
+    }
+
+	async componentDidMount(){
+		var names = await this.getData('https://SASE-Labs-2020.github.io/assets/names.json');
+		var buildings = Object.keys(await this.getData('https://SASE-Labs-2020.github.io/assets/names.json')).map(
+			function(name){
+				return {value: name}
+			});
+		this.setState({EBank: buildings, dictionary: names});
+	}
 
 	render() 
 	{
@@ -23,50 +38,82 @@ export default class RouteSelection extends Component
 			);
 		}
 
-		let EBank = [
-			{value: "10 Church St",}, {value: "Akerman Hall",}, {value: "Amundson Hall",},
-			  {value: "Boynton Clinic",}, {value: "Childrens Rehab",}, {value: "The Civil Engineering Building",},
-			  {value: "Coffman Union",}, {value: "Civil Engineering",}, {value: "Diehl Hall",},
-			  {value: "Dwan Cardio./Masonic Cancer Research Center",}, {value: "East River Road Garage",}, 
-			  {value: "Folwell Hall",}, {value: "Ford Hall",}, {value: "The Graduate Hotel",},
-			  {value: "Hospital Patient/Visitor Ramp",}, {value: "Jackson Hall",}, {value: "Johnston Hall",},
-			  {value: "Keller Hall",}, {value: "Kolthoff Hall",}, {value: "Lind Hall",},
-			  {value: "Mayo Auditorium",}, {value: "Mayo Building",}, {value: "Molecular & Cellular Biology Building",},
-			  {value: "McNamara Alumni Center",}, {value: "Mechanical Engineering Building",}, {value: "Moos Tower",},
-			  {value: "Morrill Hall",}, {value: "Murphy Hall",}, {value: "Nils-Hasselmo Hall",},
-			  {value: "Nolte Center",}, {value: "Nolte Center Garage",}, {value: "Northrop Auditorium",},
-			  {value: "Northrop Garage",}, {value: "P-W Building",}, {value: "Rapson Hall",},
-			  {value: "Shepherd Labs",},{value: "Smith Hall",},{value: "Tate Hall",},
-			  {value: "Transportation and Safety Building",},{value: "UMN Medical Center",},
-			  {value: "University Avenue Ramp",}, {value: "Variety Club Resource Center",},
-			  {value: "Vincent Hall",},{value: "Walter Library",}, {value: "Washington Avenue Parking Ramp",},
-			  {value: "Weaver-Densford Hall",},{value: "Williamson Hall",},{value: "Yudof Hall",},
-		];
-
 		return (
-			<ScrollView>
-				<Text style={styles.heading}>Pick Your Route</Text>			
+			<ScrollView style={{ backgroundColor: '#7fb9e6' }}>
+				<Title style={styles.heading}>Pick Your Route</Title>			
 				<Dropdown
         			label='Starting Building'
-					data={EBank}
+					data={this.state.EBank}
 					onChangeText ={(value)=> this.setState({start: value})}
-					baseColor='#ffcc33'
-					textColor='#7a0019'
-					itemColor='#ffcc33'
-					selectedItemColor='#610014'
+					baseColor='#0668B3'
+					textColor='#0668B3'
+					containerStyle={{ margin: 10 }}
+					itemColor='#0668B3'
+					selectedItemColor='#0668B3'
 			     />
 
 				<Dropdown
         			label='Ending Building'
-					data={EBank}
+					data={this.state.EBank}
 					onChangeText ={(value)=> this.setState({end: value})}
-					baseColor='#ffcc33'
-					textColor='#7a0019'
-					itemColor='#ffcc33'
-					selectedItemColor='#610014'
+					baseColor='#0668B3'
+					textColor='#0668B3'
+					containerStyle={{ margin: 10 }}
+					itemColor='#0668B3'
+					selectedItemColor='#0668B3'
 			     />
 
-				<Button title="Submit" style={styles.button} onPress={()=>console.log(this.state.start + ", " + this.state.end)}/>
+				<Button
+					color='#7DC242'
+					mode='contained'
+					style={{ margin: 20 }}
+					onPress={ async ()=>{
+						const Dijkstra = require('node-dijkstra');
+						const graph = new Dijkstra(await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json'));
+						const path = graph.path(this.state.start, this.state.end);
+
+						var temps = path.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[this.state.dictionary[cur], this.state.dictionary[src[idx+1]]]]) : acc, []);
+						var temps = temps.map(temp => temp.join("_"));
+
+						this.props.navigation.navigate('Graph', {filenames: temps});
+						this.props.navigation.navigate('Direction', {buildings: path.map(key => this.state.dictionary[key])});
+						
+						//this.props.navigation.navigate('Graph', {filenames: ['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']});
+						//this.props.navigation.navigate('Direction', {buildings: ['tNs', 'graduate', 'mcNamara', 'universityAveRamp']})
+					}}
+				>
+					Get Directions	
+				</Button>
+				<Button
+					color='#7DC242'
+					mode='contained'
+					style={{ margin: 20 }}
+					onPress={async ()=>{
+						const Dijkstra = require('node-dijkstra');
+						const graph = new Dijkstra(await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json'));
+						const path = graph.path(this.state.start, this.state.end);
+
+						var temps = path.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[this.state.dictionary[cur], this.state.dictionary[src[idx+1]]]]) : acc, []);
+						var temps = temps.map(temp => temp.join("_"));
+
+						this.props.navigation.navigate('Direction', {buildings: path.map(key => this.state.dictionary[key])});
+						this.props.navigation.navigate('Graph', {filenames: temps});
+						
+						//this.props.navigation.navigate('Graph', {filenames: ['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']});
+						//this.props.navigation.navigate('Direction', {buildings: ['tNs', 'graduate', 'mcNamara', 'universityAveRamp']})
+					}}
+				>
+					See Path
+				</Button>
+				<Button
+					color='#7DC242'
+					mode='contained'
+					style={{ margin: 20 }}
+					onPress={() => this.props.navigation.navigate('Graph', {filenames: null})
+					}
+				>
+					See all Paths
+				</Button>
 			</ScrollView>
 		);
 	}

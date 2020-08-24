@@ -10,19 +10,20 @@ const colors = {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
+		backgroundColor: '#7fb9e6',
+		//alignItems: 'center',
 		justifyContent: 'center',
+		padding: 20
 	},
 	heading: {
-		fontFamily: 'neutraface',
+		//fontFamily: 'neutraface',
 		fontSize: 30,
 		padding: 22,
 		color: colors.green,
 		backgroundColor: colors.blue,
 	},
 	subHeading:{
-		fontFamily: 'neutraface',
+		//fontFamily: 'neutraface',
 		fontSize: 18,
 		alignItems: 'flex-start',
 		padding: 15,
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 	item: {
 		padding: 10,
 		fontSize: 16,
-		fontFamily: 'open-sans',
+		//fontFamily: 'open-sans',
 	},
 	image: {
 		width: 300,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
 	},
 	dropdownSm : {
 		alignItems: "flex-start",
-		fontFamily: 'open-sans',
+		//fontFamily: 'open-sans',
 		fontSize: 14,
 		backgroundColor: colors.green,
 		color: colors.blue,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
 	},
 	dropdownLg : {
 		alignItems: "flex-start",
-		fontFamily: 'open-sans',
+		//fontFamily: 'open-sans',
 		fontSize: 16,
 		backgroundColor: colors.green,
 		color: colors.blue,
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
 		width: 50,
 		height: 20,
 		alignItems: "center",
-		fontFamily: 'open-sans',
+		//fontFamily: 'open-sans',
 		fontSize: 12,
 		backgroundColor: colors.blue,
 		color: colors.green,
