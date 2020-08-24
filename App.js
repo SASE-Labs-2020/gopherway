@@ -16,7 +16,7 @@ export default class App extends Component {
                 <Tab.Navigator
                     initialRouteName="Start"
                     activeColor="white"
-                    style={{ backgroundColor: 'blue' }}
+                    barStyle={{ backgroundColor: '#343a40' }}
                 >
 
                     <Tab.Screen
@@ -24,7 +24,9 @@ export default class App extends Component {
                         component={RouteSelection}
                         options={{
                             tabBarLabel: 'Route',
-                            tabBarIcon: <MaterialCommunityIcons name="mdi-directions" color='white' size={26} />,
+                            tabBarIcon: ({ color }) => (
+                                <MaterialCommunityIcons name="directions" color={color} size={26} />
+                            ),
                         }}
                     />
 

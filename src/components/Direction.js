@@ -82,9 +82,10 @@ export default class Direction extends Component {
 	render() {
 		if (this.props.route.params.buildings==null){
 			return (
-				<Text>
-					No route currently selected.
-				</Text>
+					<Card style={styles.container}>
+						<Title style={{ 'color': 'white' }}>There are no paths between the two buildings you selected</Title>
+						<Paragraph style={{ 'color': 'white' }}>Please try again</Paragraph>
+					</Card>
 			)
 		}
 		if (this.state.isLoading) {
