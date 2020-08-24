@@ -5,6 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Direction from './src/components/Direction';
 import RouteSelection from './src/components/RouteSelection';
 import GraphEdge from './src/components/GraphEdge';
+import About from './src/components/About';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -50,6 +51,17 @@ export default class App extends Component {
                             tabBarLabel: 'Map',
                             tabBarIcon: ({ color }) => (
                                 <MaterialCommunityIcons name="map" color={color} size={26} />
+                            ),
+                        }}
+                    />
+
+                    <Tab.Screen
+                        name="About"
+                        component={About}
+                        options={{
+                            tabBarLabel: 'About',
+                            tabBarIcon: ({ color }) => (
+                                <MaterialCommunityIcons name="information" color={color} size={26} />
                             ),
                         }}
                     />

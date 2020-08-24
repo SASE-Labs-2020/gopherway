@@ -47,6 +47,7 @@ export default class RouteSelection extends Component
 					onChangeText ={(value)=> this.setState({start: value})}
 					baseColor='#0668B3'
 					textColor='#0668B3'
+					containerStyle={{ margin: 10 }}
 					itemColor='#0668B3'
 					selectedItemColor='#0668B3'
 			     />
@@ -57,6 +58,7 @@ export default class RouteSelection extends Component
 					onChangeText ={(value)=> this.setState({end: value})}
 					baseColor='#0668B3'
 					textColor='#0668B3'
+					containerStyle={{ margin: 10 }}
 					itemColor='#0668B3'
 					selectedItemColor='#0668B3'
 			     />
@@ -64,6 +66,7 @@ export default class RouteSelection extends Component
 				<Button
 					color='#7DC242'
 					mode='contained'
+					style={{ margin: 20 }}
 					onPress={ async ()=>{
 						const Dijkstra = require('node-dijkstra');
 						const graph = new Dijkstra(await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json'));
@@ -79,7 +82,37 @@ export default class RouteSelection extends Component
 						//this.props.navigation.navigate('Direction', {buildings: ['tNs', 'graduate', 'mcNamara', 'universityAveRamp']})
 					}}
 				>
-					Submit	
+					Get Directions	
+				</Button>
+				<Button
+					color='#7DC242'
+					mode='contained'
+					style={{ margin: 20 }}
+					onPress={async ()=>{
+						const Dijkstra = require('node-dijkstra');
+						const graph = new Dijkstra(await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json'));
+						const path = graph.path(this.state.start, this.state.end);
+
+						var temps = path.reduce((acc, cur, idx, src) => idx < src.length - 1 ? acc.concat([[this.state.dictionary[cur], this.state.dictionary[src[idx+1]]]]) : acc, []);
+						var temps = temps.map(temp => temp.join("_"));
+
+						this.props.navigation.navigate('Direction', {buildings: path.map(key => this.state.dictionary[key])});
+						this.props.navigation.navigate('Graph', {filenames: temps});
+						
+						//this.props.navigation.navigate('Graph', {filenames: ['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']});
+						//this.props.navigation.navigate('Direction', {buildings: ['tNs', 'graduate', 'mcNamara', 'universityAveRamp']})
+					}}
+				>
+					See Path
+				</Button>
+				<Button
+					color='#7DC242'
+					mode='contained'
+					style={{ margin: 20 }}
+					onPress={() => this.props.navigation.navigate('Graph', {filenames: null})
+					}
+				>
+					See all Paths
 				</Button>
 			</ScrollView>
 		);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, View, Text } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import {Polyline} from 'react-native-maps';
 import styles from '../style';
@@ -81,7 +81,7 @@ export default class GraphEdge extends Component
 						);
 					});
 			});
-			marker_urls = urls.forEach(url =>{return fetch(url, {
+			marker_urls = marker_urls.forEach(url =>{return fetch(url, {
 					method: "GET",
 					headers: {
 						'Accept': 'application/json',
@@ -106,7 +106,8 @@ export default class GraphEdge extends Component
 	async componentDidUpdate(){
 		if(this.props.route.params.filenames!=null && JSON.stringify(this.state.filenames)!=JSON.stringify(this.props.route.params.filenames)){
 			var urls;
-			this.setState({filenames: this.props.route.params.filenames, data: []});
+			var marker_urls;
+			this.setState({filenames: this.props.route.params.filenames, data: [], markerData: []});
 			urls = this.props.route.params.filenames.map(filename => 'https://sase-labs-2020.github.io/assets/directions/'+ filename + '.json');
 			urls = urls.forEach(url =>{return fetch(url, {
 					method: "GET",
@@ -128,7 +129,7 @@ export default class GraphEdge extends Component
 					});
 			});
 			marker_urls = this.props.route.params.filenames.map(filename => 'https://sase-labs-2020.github.io/assets/informations/' + filename.split('_')[0] + '.json').concat(this.props.route.params.filenames.pop().split('_')[1]);
-			marker_urls = urls.forEach(url =>{return fetch(url, {
+			marker_urls = marker_urls.forEach(url =>{return fetch(url, {
 					method: "GET",
 					headers: {
 						'Accept': 'application/json',
@@ -165,14 +166,14 @@ export default class GraphEdge extends Component
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
 				{this.state.data.map(json => <Polyline strokeWidth={3} strokeColor='#0668B3' coordinates={json.coordinates}/>)}
 				{this.state.markerData.map(json => 
-					<Marker coordinate={json.location}>
-						<Callout>
-							<Card>
+					<Marker coordinate={json.location} pinColor='#7DC242'>
+						<Callout style={{ width: 300 }}>
+							<View>
 								<Title>{json.building}</Title>
-								{json.info.university ? <Paragraph>json.info.university</Paragraph> : null}
-								{json.info.public ? <Paragraph>json.info.public</Paragraph> : null}
-								{json.info.accessibility ? <Paragraph>json.info.accessibility</Paragraph> : null}
-							</Card>
+								{json.info.university ? <Paragraph>{json.info.university}</Paragraph> : null}
+								{json.info.public ? <Paragraph>{json.info.public}</Paragraph> : null}
+								{json.info.accessibility ? <Paragraph>{json.info.accessibility}</Paragraph> : null}
+							</View>
 						</Callout>
 					</Marker>
 				)}
