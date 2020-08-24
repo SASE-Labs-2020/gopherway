@@ -24,9 +24,7 @@ export default class App extends Component {
                         component={RouteSelection}
                         options={{
                             tabBarLabel: 'Route',
-                            tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="directions" color={color} size={26} />
-                            ),
+                            tabBarIcon: <MaterialCommunityIcons name="mdi-directions" color='white' size={26} />,
                         }}
                     />
 

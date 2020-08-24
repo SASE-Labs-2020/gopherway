@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Text, View, SafeAreaView, ScrollView, StyleSheet, Image} from 'react-native';
 import styles from '../style';
+import { Card, Title, Caption, Paragraph } from 'react-native-paper';
 
 export default class Direction extends Component {
 	constructor(props) {
@@ -97,16 +98,16 @@ export default class Direction extends Component {
 			<ScrollView>
 				{this.state.data.map(data => 
         <View>
-				<Text style={styles.heading}>Getting from {data.origin} to {data.destination}</Text>			
+				<Title style={styles.heading}>Getting from {data.origin} to {data.destination}</Title>			
 				<FlatList
 					scrollEnabled={this.state.scrollable}
 					data={data.info}
 					renderItem={({item}) => 
-						<SafeAreaView style={styles.container}>
-							<Text>{item.instr}</Text>
-							<Image style={item.src ? styles.image : null} source={item.src}/>
-							<Text>{item.desc}</Text>
-						</SafeAreaView>
+						<Card style={styles.container}>
+							<Title style={{ 'color': 'white' }}>{item.instr}</Title>
+							{item.src ? <Card.Cover source={item.src}/> : null }
+							{item.desc ? <Paragraph style={{ 'color': 'white' }}>{item.desc}</Paragraph> : null }
+						</Card>
 					}
 					keyExtractor={(item,index) => index.toString()}
 				/>

@@ -10,9 +10,10 @@ const colors = {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#7fb9e6',
 		//alignItems: 'center',
 		justifyContent: 'center',
+		padding: 20
 	},
 	heading: {
 		//fontFamily: 'neutraface',

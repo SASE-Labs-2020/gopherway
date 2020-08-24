@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {ActivityIndicator, FlatList, Image, ScrollView, Text, View, Button} from 'react-native';
+import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from 'react-native';
 import styles from '../style';
 import { Dropdown } from 'react-native-material-dropdown';
+import { Title, Button } from 'react-native-paper';
 
 export default class RouteSelection extends Component 
 {
@@ -38,31 +39,31 @@ export default class RouteSelection extends Component
 		}
 
 		return (
-			<ScrollView>
-				<Text style={styles.heading}>Pick Your Route</Text>			
+			<ScrollView style={{ backgroundColor: '#7fb9e6' }}>
+				<Title style={styles.heading}>Pick Your Route</Title>			
 				<Dropdown
         			label='Starting Building'
 					data={this.state.EBank}
 					onChangeText ={(value)=> this.setState({start: value})}
-					baseColor='#ffcc33'
-					textColor='#7a0019'
-					itemColor='#ffcc33'
-					selectedItemColor='#610014'
+					baseColor='#0668B3'
+					textColor='#0668B3'
+					itemColor='#0668B3'
+					selectedItemColor='#0668B3'
 			     />
 
 				<Dropdown
         			label='Ending Building'
 					data={this.state.EBank}
 					onChangeText ={(value)=> this.setState({end: value})}
-					baseColor='#ffcc33'
-					textColor='#7a0019'
-					itemColor='#ffcc33'
-					selectedItemColor='#610014'
+					baseColor='#0668B3'
+					textColor='#0668B3'
+					itemColor='#0668B3'
+					selectedItemColor='#0668B3'
 			     />
 
 				<Button
-					title="Submit"
-					style={styles.button}
+					color='#7DC242'
+					mode='contained'
 					onPress={ async ()=>{
 						const Dijkstra = require('node-dijkstra');
 						const graph = new Dijkstra(await this.getData('https://SASE-Labs-2020.github.io/assets/graph.json'));
@@ -77,7 +78,9 @@ export default class RouteSelection extends Component
 						//this.props.navigation.navigate('Graph', {filenames: ['tNs_graduate', 'graduate_mcNamara', 'mcNamara_universityAveRamp']});
 						//this.props.navigation.navigate('Direction', {buildings: ['tNs', 'graduate', 'mcNamara', 'universityAveRamp']})
 					}}
-				/>
+				>
+					Submit	
+				</Button>
 			</ScrollView>
 		);
 	}

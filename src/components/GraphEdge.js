@@ -121,7 +121,7 @@ export default class GraphEdge extends Component
 		
 		return(
 			<MapView region={this.state.Region}  style={styles.mapStyle}>
-				{this.state.data.map(json => <Polyline coordinates={json.coordinates}/>)}
+				{this.state.data.map(json => <Polyline strokeWidth={3} strokeColor='#0668B3' coordinates={json.coordinates}/>)}
 			</MapView>
 		);
 	}
